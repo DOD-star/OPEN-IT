@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Science Prep 3 | Final Review</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #0f172a; /* Dark Elegant Background */
+            color: #f1f5f9;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        header h1 {
+            font-size: 3rem;
+            background: linear-gradient(to right, #60a5fa, #a855f7);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        /* Unit Styling */
+        .unit-section {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+            margin-bottom: 50px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .unit-1 { border-top: 5px solid #3b82f6; }
+        .unit-2 { border-top: 5px solid #ef4444; }
+        .unit-3 { border-top: 5px solid #10b981; }
+        .unit-4 { border-top: 5px solid #f59e0b; }
+
+        h2 { font-size: 2rem; margin-top: 0; }
+        h3 { color: #94a3b8; font-size: 1.2rem; margin-top: 30px; border-left: 3px solid currentColor; padding-left: 15px; }
+
+        .content-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .content-list li {
+            margin-bottom: 15px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .content-list li::before {
+            content: "•";
+            position: absolute;
+            left: 0;
+            color: #60a5fa;
+            font-size: 1.5rem;
+        }
+
+        .formula-tag {
+            background: rgba(255, 255, 255, 0.07);
+            padding: 5px 12px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            color: #cbd5e1;
+            display: inline-block;
+            margin-top: 5px;
+        }
+
+        /* Final Exam Section - في آخر الصفحة خالص */
+        .exam-footer {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(to bottom, transparent, rgba(99, 102, 241, 0.1));
+            border-radius: 40px;
+            margin-top: 40px;
+        }
+
+        .exam-footer h2 {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+
+        .main-quiz-btn {
+            display: inline-block;
+            padding: 20px 60px;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            font-weight: 800;
+            border-radius: 50px;
+            transition: all 0.4s ease;
+            box-shadow: 0 15px 30px rgba(99, 102, 241, 0.3);
+        }
+
+        .main-quiz-btn:hover {
+            transform: scale(1.1) translateY(-5px);
+            box-shadow: 0 20px 40px rgba(168, 85, 247, 0.4);
+        }
+
+        strong { color: #fff; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>Science Masterclass</h1>
+        <p>3rd Prep | Second Term Comprehensive Summary</p>
+    </header>
+
+    <section class="unit-section unit-1">
+        <h2>Unit 1: Chemical Reactions</h2>
+        <h3>Lesson 1: Chemical Reactions</h3>
+        <ul class="content-list">
+            <li><strong>Thermal Decomposition:</strong> Compounds break down by heat into simpler elements.</li>
+            <li><strong>Substitution:</strong> Simple (Metal + Acid) and Double (Neutralization & Salt/Acid).</li>
+            <li><strong>Redox:</strong> Oxidation is losing electrons; Reduction is gaining electrons.</li>
+        </ul>
+        <h3>Lesson 2: Reaction Speed</h3>
+        <ul class="content-list">
+            <li>Affected by: Surface area, Concentration, Temperature, and Catalysts.</li>
+            <li><strong>Enzymes:</strong> Biological catalysts (like Oxidase in Sweet Potatoes).</li>
+        </ul>
+    </section>
+
+    <section class="unit-section unit-2">
+        <h2>Unit 2: Electric Energy</h2>
+        <h3>Lesson 1: Electricity Properties</h3>
+        <ul class="content-list">
+            <li>Current Intensity (I) = Q / t | <span class="formula-tag">Unit: Ampere</span></li>
+            <li>Potential Difference (V) = W / Q | <span class="formula-tag">Unit: Volt</span></li>
+            <li>Ohm's Law: Resistance (R) = V / I | <span class="formula-tag">Unit: Ohm</span></li>
+        </ul>
+        <h3>Lesson 2: Cells & Radioactivity</h3>
+        <ul class="content-list">
+            <li>Connecting cells in <strong>Series</strong> (High Voltage) vs <strong>Parallel</strong> (Low Voltage).</li>
+            <li>Radioactivity: Discovery by Henri Becquerel. Uses in medicine and space.</li>
+        </ul>
+    </section>
+
+    <section class="unit-section unit-3">
+        <h2>Unit 3 & 4: Life Science</h2>
+        <h3>Heredity (Genetics)</h3>
+        <ul class="content-list">
+            <li>Mendel's Laws (Segregation & Independent Assortment).</li>
+            <li>Dominant traits appear in all individuals of the first generation.</li>
+        </ul>
+        <h3>Hormones</h3>
+        <ul class="content-list">
+            <li><strong>Insulin:</strong> Lowers glucose level. | <strong>Thyroxine:</strong> Food transformation.</li>
+            <li><strong>Adrenaline:</strong> Secreted during fear and anger.</li>
+        </ul>
+    </section>
+
+    <div class="exam-footer">
+        <h2>جاهز تقفل الساينس؟ 🚀</h2>
+        <p>اختبر معلوماتك دلوقتي وشوف هتقدر تجيب كام في الامتحان الشامل</p>
+        <br>
+        <a href="exam_science.html" class="main-quiz-btn">ابدأ الامتحان التجريبي</a>
+    </div>
+
+</div>
+
+</body>
+</html>

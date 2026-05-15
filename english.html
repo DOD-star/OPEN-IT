@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Complete Hub | New Hello & Hello Plus</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #040814;
+            --blue: #00d2ff;
+            --purple: #a855f7;
+            --gold: #f59e0b;
+            --card-bg: rgba(15, 23, 42, 0.8);
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            background: url('bg7.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f8fafc;
+        }
+
+        .glass-layer {
+            min-height: 100vh;
+            background: rgba(4, 8, 20, 0.92);
+            backdrop-filter: blur(8px);
+            padding: 50px 20px;
+        }
+
+        .container { max-width: 1200px; margin: auto; }
+
+        header {
+            text-align: center; margin-bottom: 50px;
+            border-bottom: 3px double var(--blue); padding-bottom: 25px;
+        }
+
+        header h1 { font-size: 3.2rem; color: var(--blue); margin: 0; font-weight: 800; letter-spacing: 1px; }
+        header p { font-size: 1.3rem; color: var(--gold); margin: 10px 0 0 0; font-weight: 700; }
+
+        .books-grid {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 40px;
+        }
+
+        @media (max-width: 950px) { .books-grid { grid-template-columns: 1fr; } }
+
+        .book-section {
+            background: var(--card-bg); border-radius: 24px; padding: 35px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .book-title {
+            color: #000; padding: 12px 30px; border-radius: 50px;
+            font-weight: 800; font-size: 1.4rem; display: inline-block; margin-bottom: 25px;
+        }
+
+        .new-hello-title { background: linear-gradient(45deg, var(--blue), #0284c7); box-shadow: 0 4px 15px rgba(0, 210, 255, 0.3); }
+        .hello-plus-title { background: linear-gradient(45deg, var(--purple), #7c3aed); box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3); color: #fff; }
+
+        .topic-card {
+            background: rgba(5, 10, 25, 0.6); margin-bottom: 25px; padding: 20px;
+            border-radius: 12px; border-left: 5px solid var(--blue);
+        }
+
+        .plus-card { border-left-color: var(--purple); }
+
+        .topic-card h3 { margin: 0 0 15px 0; color: var(--gold); font-size: 1.4rem; }
+        .sub-rule { color: var(--blue); font-weight: 600; margin-top: 10px; display: block; }
+        .plus-rule { color: var(--purple); }
+
+        ul { padding-left: 20px; padding-right: 20px; margin: 8px 0; }
+        li { margin-bottom: 8px; font-size: 1.05rem; line-height: 1.6; color: #cbd5e1; }
+        li b { color: #fff; }
+
+        .tip-box {
+            background: rgba(245, 158, 11, 0.08); border: 1px solid rgba(245, 158, 11, 0.2);
+            padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 0.95rem; color: #e2e8f0;
+        }
+        .tip-box b { color: var(--gold); }
+
+        /* بوابة الامتحان الجاحدة */
+        .exam-portal {
+            width: 100%; padding: 45px 20px; text-align: center;
+            background: rgba(15, 23, 42, 0.8); border: 2px dashed var(--blue);
+            border-radius: 20px; margin-top: 50px; box-shadow: 0 15px 30px rgba(0,0,0,0.4); box-sizing: border-box;
+        }
+
+        .exam-btn {
+            display: inline-block; padding: 18px 50px; background: transparent;
+            color: var(--blue); font-size: 1.7rem; font-weight: 800; text-decoration: none;
+            border: 3px solid var(--blue); border-radius: 50px; position: relative;
+            transition: 0.4s; overflow: hidden; z-index: 1;
+        }
+
+        .exam-btn:hover { color: #000; box-shadow: 0 0 30px var(--blue); transform: scale(1.05); }
+        .exam-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--blue); transition: 0.4s; z-index: -1;
+        }
+        .exam-btn:hover::before { left: 0; }
+
+        footer { text-align: center; margin-top: 60px; color: var(--gold); font-weight: 700; }
+    </style>
+</head>
+<body>
+
+<div class="glass-layer">
+    <div class="container">
+        <header>
+            <h1>🦅 Al-Saqr English Encyclopedia</h1>
+            <p>The Ultimate Dual-System Revision Guide</p>
+        </header>
+
+        <div class="books-grid">
+            
+            <div class="book-section">
+                <div class="book-title new-hello-title">📘 Part 1: New Hello (Main Curriculum)</div>
+                
+                <div class="topic-card">
+                    <h3>⚖️ Essential Grammar (Units 7-12)</h3>
+                    
+                    <span class="sub-rule">1. Present & Past Passive (المبني للمجهول)</span>
+                    <ul>
+                        <li><b>Present Simple Passive:</b> Obj + am / is / are + P.P.<br><i>Ex: These photos <b>are taken</b> by my sister.</i></li>
+                        <li><b>Past Simple Passive:</b> Obj + was / were + P.P.<br><i>Ex: The ancient city <b>was discovered</b> in 1812.</i></li>
+                    </ul>
+
+                    <span class="sub-rule">2. First & Second Conditionals (حالات If)</span>
+                    <ul>
+                        <li><b>First Conditional (احتمال في المستقبل):</b> If + Present Simple → will + Inf.<br><i>Ex: If we melt the ice, sea levels <b>will rise</b>.</i></li>
+                        <li><b>Second Conditional (موقف خيالي/مستحيل):</b> If + Past Simple → would + Inf.<br><i>Ex: If I <b>had</b> more time, I <b>would read</b> more books.</i></li>
+                    </ul>
+
+                    <span class="sub-rule">3. Past Perfect (الماضي التام)</span>
+                    <ul>
+                        <li><b>Form:</b> Subject + had + P.P. (يدل على الحدث الأول في الماضي).</li>
+                        <li><b>Key words:</b> After / As soon as + [Past Perfect], Before / By the time + [Past Simple].<br><i>Ex: After he <b>had saved</b> money, he bought the car.</i></li>
+                    </ul>
+                </div>
+
+                <div class="topic-card">
+                    <h3>📝 Core Vocabulary (New Hello)</h3>
+                    <ul>
+                        <li><b>Habitats:</b> Coastal, Wetland, Desert, Forest, Rainforest, Arctic.</li>
+                        <li><b>Environment:</b> Renewable energy, Climate change, Fossil fuels, Landfill site.</li>
+                        <li><b>Space:</b> Satellite, Space station, Astronaut, Telescope.</li>
+                        <li><b>Media:</b> Journalist, Editor, Photographer, Newsreader.</li>
+                    </ul>
+                    <div class="tip-box"><b>Exam Tip:</b> الفرق بين <b>Robbery</b> (سرقة مكان بإكراه) و <b>Theft</b> (سرقة شيء بدون أن يلاحظ أحد).</div>
+                </div>
+            </div>
+
+            <div class="book-section">
+                <div class="book-title hello-plus-title">🔮 Part 2: Hello Plus (Advanced Level)</div>
+                
+                <div class="topic-card plus-card">
+                    <h3>🚀 Advanced Grammar Focus</h3>
+                    
+                    <span class="sub-rule plus-rule">1. Reported Speech (المباشر وغير المباشر المتقدم)</span>
+                    <ul>
+                        <li><b>Statements:</b> حوّل الأفعال للماضي وفك الأقواص بـ (that).<br><i>Ex: "I am flying tomorrow" → He said that he <b>was flying the next day</b>.</i></li>
+                        <li><b>Orders / Advice:</b> نربط بـ (to + Inf) في الإثبات أو (not to + Inf) في النهي.<br><i>Ex: The doctor told me <b>not to eat</b> fast food.</i></li>
+                    </ul>
+
+                    <span class="sub-rule plus-rule">2. Modal Verbs for Deduction (الأفعال الناقصة للاستنتاج)</span>
+                    <ul>
+                        <li><b>Sure it's true:</b> Must + Inf / Must have + P.P.</li>
+                        <li><b>Sure it's impossible:</b> Can't + Inf / Can't have + P.P.</li>
+                        <li><b>Possibility (احتمال):</b> Might / Could + Inf.</li>
+                    </ul>
+
+                    <span class="sub-rule plus-rule">3. Relative Clauses (ضمائر الوصل المحددة وغير المحددة)</span>
+                    <ul>
+                        <li>استخدام <b>Whose</b> للملكية، و <b>Whom</b> للمفعول العاقل، والفرق بين <b>Where</b> و <b>Which</b> مع الأماكن (لو فيه وصف للمكان بناخد Which).</li>
+                    </ul>
+                </div>
+
+                <div class="topic-card plus-card">
+                    <h3>💎 High-Level Vocabulary & Idioms</h3>
+                    <ul>
+                        <li><b>Biodiversity:</b> التنوع البيولوجي (The variety of plant and animal life).</li>
+                        <li><b>Deforestation:</b> إزالة الغابات (Clearing a wide area of trees).</li>
+                        <li><b>Architectural Heritage:</b> التراث المعماري للمباني القديمة.</li>
+                        <li><b>Artificial Intelligence (AI):</b> الذكاء الاصطناعي وأنظمة الروبوتات المتقدمة.</li>
+                        <li><b>Biographies:</b> كتابة السير الذاتية للشخصيات التاريخية المؤثرة.</li>
+                    </ul>
+                    <div class="tip-box" style="border-color: var(--purple); background: rgba(168, 85, 247, 0.05);"><b>Advanced Tip:</b> كلمة <b>Sustainable</b> تعني متجدد وصديق للبيئة وطويل الأمد (Eco-friendly & long-lasting).</div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="exam-portal">
+            <h2 style="color: var(--blue); font-size: 2.2rem; margin-top: 0; margin-bottom: 10px; font-family: 'Cairo';">جاهز تفرم امتحان الـ English؟ 🇬🇧</h2>
+            <p style="color: #94a3b8; margin-bottom: 30px; font-size: 1.15rem;">الامتحان ميكس متوازن بين المنهجين عشان يقيس مستواك الحقيقي.</p>
+            <a href="english_exam.html" class="exam-btn">
+                🦁 Launch English Challenge
+            </a>
+        </div>
+
+        <footer>
+            <p>Prepared by Al-Saqr Team | 2026 🦅</p>
+        </footer>
+    </div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Science AI Tutor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background: #0f172a;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+            display: flex; justify-content: center; align-items: center;
+            height: 100vh; margin: 0;
+        }
+        .ai-container {
+            width: 90%; max-width: 500px;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 30px; border-radius: 24px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .bot-avatar {
+            font-size: 60px; margin-bottom: 20px;
+            animation: float 3s ease-in-out infinite;
+        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        h1 { font-family: 'Cairo'; color: #818cf8; }
+        .chat-box {
+            background: rgba(0,0,0,0.3); padding: 15px;
+            border-radius: 12px; margin: 20px 0; text-align: left;
+            font-size: 0.9rem; line-height: 1.6;
+        }
+        .btn-back {
+            background: #818cf8; color: white; border: none;
+            padding: 10px 25px; border-radius: 12px; cursor: pointer;
+            text-decoration: none; font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="ai-container">
+        <div class="bot-avatar">🤖</div>
+        <h1>AI Science Tutor</h1>
+        <div class="chat-box" id="ai-response">
+            Hello! I'm your AI assistant. I see you're struggling with a question about Chemical Reactions or Electricity. <br><br>
+            <strong>Tip:</strong> Always look at the unit of measurement or the color change in the reaction!
+        </div>
+        <p style="font-family:'Cairo';">أنا هنا عشان أسهلك الصعب، ارجع كمل امتحانك ولو عطلت في حاجة تانية اسألني!</p>
+        <a href="exam_science.html" class="btn-back">Return to Exam</a>
+    </div>
+</body>
+</html>

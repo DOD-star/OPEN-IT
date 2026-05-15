@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Math Prep 3 | Algebra & Geometry Summary</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Montserrat:wght@900&display=swap" rel="stylesheet">
+    <style>
+        body {
+            background-color: #0d1117;
+            color: #e6edf3;
+            font-family: 'Segoe UI', sans-serif;
+            margin: 0; padding: 40px 20px;
+        }
+        .wrapper { max-width: 850px; margin: 0 auto; }
+        
+        .lesson-card {
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.5);
+        }
+
+        .section-title {
+            text-align: center; margin: 50px 0 30px;
+            padding: 20px; border-radius: 10px;
+            font-family: 'Montserrat', sans-serif;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .algebra-header { background: #1f6feb; color: white; }
+        .geometry-header { background: #8957e5; color: white; }
+        
+        .title-en {
+            font-family: 'Montserrat', sans-serif;
+            color: #58a6ff; font-size: 1.4rem;
+            margin-bottom: 15px; display: block;
+            border-left: 5px solid #58a6ff; padding-left: 15px;
+            text-align: left;
+        }
+        .geo-title { color: #d2a8ff; border-left-color: #d2a8ff; }
+        
+        .desc-ar {
+            font-family: 'Cairo', sans-serif;
+            direction: rtl; text-align: right;
+            line-height: 1.8; color: #8b949e;
+        }
+
+        .formula-container {
+            background: #010409; color: #39d353;
+            padding: 25px; border-radius: 10px;
+            text-align: center; margin: 20px 0;
+            border: 2px solid #238636;
+            font-size: 1.8rem; font-weight: 900;
+            font-family: 'Courier New', monospace;
+        }
+
+        .badge {
+            background: rgba(88, 166, 255, 0.1); color: #58a6ff;
+            padding: 5px 12px; border-radius: 20px; font-size: 0.8rem; font-weight: bold;
+        }
+
+        /* تنسيق زرار الامتحان */
+        .exam-section {
+            text-align: center;
+            margin: 80px 0 40px;
+            padding: 40px;
+            border-top: 1px solid #30363d;
+        }
+
+        .start-btn {
+            background: #238636;
+            color: white;
+            border: none;
+            padding: 20px 60px;
+            border-radius: 12px;
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.5rem;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 20px rgba(35, 134, 54, 0.3);
+        }
+
+        .start-btn:hover {
+            background: #2ea043;
+            transform: scale(1.05);
+            box-shadow: 0 0 30px rgba(46, 160, 67, 0.5);
+        }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+    
+    <div class="section-title algebra-header">
+        <h1 style="margin:0;">ALGEBRA SUMMARY</h1>
+    </div>
+
+    <div class="lesson-card">
+        <span class="badge">UNIT 1</span>
+        <span class="title-en">The General Formula</span>
+        <div class="formula-container">
+            x = [ -b ± √(b² - 4ac) ] / 2a
+        </div>
+        <div class="desc-ar">المفك اللي بيحل أي معادلة من الدرجة التانية لو مش عارف تعمل لها Factorize.</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="badge">UNIT 2</span>
+        <span class="title-en">The Domain</span>
+        <div class="formula-container">
+            Domain = R - { Zeros of Denom }
+        </div>
+        <div class="desc-ar">المنطقة الآمنة للتعويض.. ابعد عن أي رقم يخلي المقام تحت بصفر!</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="badge">UNIT 3</span>
+        <span class="title-en">Probability Rules</span>
+        <div class="desc-ar">
+            لعبة الاحتمالات: <br>
+            - <b>Union (A U B)</b>: بياخد كل اللي في A و B (طماع). <br>
+            - <b>Intersection (A ∩ B)</b>: بياخد المشترك بس. <br>
+            - <b>S.S = Fai</b>: لما يكون مفيش أي تقاطع بين المجموعات.
+        </div>
+    </div>
+
+    <div class="section-title geometry-header">
+        <h1 style="margin:0;">GEOMETRY SUMMARY</h1>
+    </div>
+
+    <div class="lesson-card">
+        <span class="badge" style="background:rgba(210,168,255,0.1); color:#d2a8ff;">UNIT 4</span>
+        <span class="title-en geo-title">Angles in Circle</span>
+        <div class="formula-container" style="color: #d2a8ff; border-color: #8957e5;">
+            Central = 2 × Inscribed
+        </div>
+        <div class="desc-ar">المركزية هي "الأم" قد المحيطية مرتين طالما واقفين على نفس القوس.</div>
+    </div>
+
+    <div class="lesson-card">
+        <span class="badge" style="background:rgba(210,168,255,0.1); color:#d2a8ff;">UNIT 5</span>
+        <span class="title-en geo-title">Cyclic Quadrilateral</span>
+        <div class="formula-container" style="color: #d2a8ff; border-color: #8957e5;">
+            Opposite Angles = 180°
+        </div>
+        <div class="desc-ar">أي شكل رباعي على الدائرة، كل زاويتين في وش بعض مجموعهم 180 درجة.</div>
+    </div>
+
+    <div class="exam-section">
+        <p style="color: #8b949e; margin-bottom: 25px; font-family: 'Cairo'; font-size: 1.2rem;">ذاكرت كويس؟ جرب تمتحن دلوقتي وشوف هتجيب كام!</p>
+        <a href="math_exam.html" class="start-btn">
+            START MATH EXAM 📝
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="de" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsch Prüfung | امتحان الألماني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@500;700;900&family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050814;
+            --card: #111a2e;
+            --de-gold: #ffcc00;
+            --de-red: #ff3333;
+            --blue: #22d3ee;
+            --green: #10b981;
+            --text: #f8fafc;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            margin: 0; padding: 0;
+            min-height: 100vh;
+        }
+
+        /* شريط التقدم */
+        .progress-container {
+            position: fixed; top: 0; left: 0; width: 100%; height: 6px;
+            background: #1e293b; z-index: 1000;
+        }
+        .progress-bar {
+            height: 100%; width: 0%;
+            background: linear-gradient(90deg, var(--de-red), var(--de-gold));
+            transition: width 0.3s ease;
+        }
+
+        .container { max-width: 850px; margin: 60px auto; padding: 20px; }
+
+        header {
+            text-align: center; margin-bottom: 40px;
+            background: linear-gradient(135deg, #110707, #1e1603);
+            padding: 30px; border-radius: 20px;
+            border: 1px solid rgba(255, 204, 0, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        header h1 { color: var(--de-gold); font-size: 2.5rem; margin: 0 0 10px 0; font-weight: 900; }
+        header p { color: #cbd5e1; margin: 0; font-size: 1.15rem; font-weight: 700; }
+
+        .q-card {
+            background: var(--card); border-radius: 20px; padding: 25px; margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05); box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .q-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 15px; border-bottom: 1px dashed rgba(255, 204, 0, 0.2); padding-bottom: 10px;
+        }
+
+        .q-tag {
+            font-weight: 900; padding: 4px 15px; border-radius: 30px; font-size: 0.85rem;
+            background: var(--de-red); color: #fff; text-transform: uppercase;
+        }
+
+        .q-text { font-size: 1.25rem; font-weight: 700; line-height: 1.6; direction: ltr; text-align: left; }
+        .q-text-ar { font-size: 1.1rem; color: #94a3b8; margin-top: 5px; }
+
+        .options-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 12px; margin-top: 20px; }
+
+        .option-label {
+            background: #17233c; padding: 15px; border-radius: 12px; cursor: pointer;
+            border: 2px solid transparent; display: flex; align-items: center;
+            transition: all 0.2s ease; font-size: 1.1rem; font-weight: 700; direction: ltr;
+        }
+
+        .option-label:hover { background: #1d2d4d; border-color: var(--blue); transform: translateY(-2px); }
+        .option-label input { margin-right: 12px; transform: scale(1.2); accent-color: var(--blue); }
+
+        .correct-answer { border-color: var(--green) !important; background: rgba(16, 185, 129, 0.15) !important; }
+        .wrong-answer { border-color: var(--de-red) !important; background: rgba(255, 51, 51, 0.15) !important; }
+        .feedback-msg { margin-top: 15px; font-weight: 700; font-size: 1rem; display: none; }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--de-red), var(--de-gold)); color: #000;
+            border: none; padding: 20px 40px; font-size: 1.5rem; font-weight: 900; border-radius: 50px;
+            cursor: pointer; width: 100%; font-family: 'Cairo', sans-serif;
+            box-shadow: 0 10px 25px rgba(255, 204, 0, 0.2); transition: 0.3s; margin-top: 20px;
+        }
+
+        .submit-btn:hover { transform: scale(1.02); box-shadow: 0 15px 35px rgba(255, 204, 0, 0.4); }
+
+        #result-modal {
+            position: fixed; inset: 0; background: rgba(5, 8, 20, 0.98); display: none;
+            flex-direction: column; align-items: center; justify-content: center; z-index: 2000;
+            backdrop-filter: blur(15px); animation: zoomIn 0.4s ease-out;
+        }
+
+        @keyframes zoomIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-content {
+            background: var(--card); padding: 50px; border-radius: 30px; text-align: center;
+            border: 2px solid var(--de-gold); max-width: 500px; width: 90%; box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        }
+
+        .final-score { font-size: 5rem; font-weight: 900; color: var(--de-gold); margin: 20px 0; }
+        .rank-text { font-size: 1.5rem; font-weight: 700; margin-bottom: 30px; }
+        .close-btn {
+            background: #17233c; color: #fff; border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 35px; border-radius: 50px; cursor: pointer; font-weight: 700; transition: 0.3s;
+        }
+        .close-btn:hover { background: var(--de-gold); color: #000; }
+    </style>
+</head>
+<body>
+
+<div class="progress-container"><div class="progress-bar" id="p-bar"></div></div>
+
+<div class="container">
+    <header>
+        <h1>Deutsch-Prüfung 🦅</h1>
+        <p>اختبار الألماني التفاعلي المتنوع - 25 سؤال (ترتيب عشوائي للإجابات)</p>
+    </header>
+
+    <div id="quiz-wrapper"></div>
+
+    <button class="submit-btn" onclick="evaluateQuiz()">رصد الدرجات وإظهار النتيجة 🏁</button>
+</div>
+
+<div id="result-modal">
+    <div class="modal-content">
+        <h2 style="font-size: 2rem; margin: 0; color: var(--blue);">Ergebnis تقرير المستوى</h2>
+        <div class="final-score" id="score-disp">0 / 25</div>
+        <div class="rank-text" id="rank-disp">جاري تحليل الإجابات...</div>
+        <button class="close-btn" onclick="closeModal()">مراجعة الأخطاء والإجابات الصحيحة</button>
+    </div>
+</div>
+
+<script>
+    // تم التنويع المتعمد في رقم الإجابة الصحيحة (a) لتكون موزعة بين (0, 1, 2, 3)
+    const examQuestions = [
+        { q: "Ich _______ heute fleißig für die Grammatikprüfung lernen.", ar: "اختر الفعل الناقص المناسب: (أنا يجب أن أذاكر بجد...)", o: ["will", "muss", "kann", "müssen"], a: 1 },
+        { q: "Er bleibt im Bett, _______ er stark erkältet ist.", ar: "اختر الرابط الصحيح: (هو سيبقى في السرير لأنه مصاب ببرد شديد)", o: ["denn", "dass", "weil", "aber"], a: 2 },
+        { q: "Du feierst deinen Geburtstag. Was sagen deine Freunde?", ar: "موقف: أنت تحتفل بعيد ميلادك، ماذا يقول أصدقاؤك؟", o: ["Alles Gute zum Geburtstag!", "Frohes Fest!", "Gute Besserung!", "Auf Wiederhören!"], a: 0 },
+        { q: "Der Film fängt _______ 20:00 Uhr an.", ar: "حرف جر زماني: (الفيلم يبدأ في تمام الساعة 20:00)", o: ["im", "am", "um", "in"], a: 2 },
+        { q: "Mein Bruder _______ sehr gut Deutsch und Englisch sprechen.", ar: "صيغة القدرة والاستطاعة: (أخي يستطيع التحدث بالألمانية جيداً)", o: ["kann", "können", "kannst", "muss"], a: 0 },
+        { q: "Ich denke, _______ das Wetter morgen sonnig wird.", ar: "جملة المفعول: (أعتقد أن الطقس غداً سيكون مشمساً)", o: ["weil", "denn", "dass", "was"], a: 2 },
+        { q: "Dein Freund ist krank. Was sagst du ihm?", ar: "موقف: صديقك مريض، ماذا تقول له؟", o: ["Viel Erfolg!", "Gute Besserung!", "Herzlichen Glückwunsch!", "Frohes neues Jahr!"], a: 1 },
+        { q: "Wir fahren _______ Sommer nach Hamburg.", ar: "حرف جر مع فصول السنة: (نحن نسافر في الصيف إلى هامبورغ)", o: ["im", "am", "um", "vor"], a: 0 },
+        { q: "Was _______ du am Wochenende machen? - Ich will schwimmen.", ar: "فعل ناقص: (ماذا تريد أن تفعل في نهاية الأسبوع؟)", o: ["muss", "kannst", "willst", "wollen"], a: 2 },
+        { q: "Ich gehe ins Kino, _______ ich habe Freizeit.", ar: "رابط الترتيب صفر (لا يغير مكان الفعل): (أنا ذاهب للسينما لأن لدي وقت فراغ)", o: ["weil", "denn", "dass", "und"], a: 1 },
+        { q: "Du fragst nach dem Preis. Was sagst du?", ar: "موقف: أنت تسأل عن السعر، ماذا تقول؟", o: ["Wie viel kostet das?", "Wie spät ist es?", "Wie komme ich zum Bahnhof?", "Was bist du von Beruf?"], a: 0 },
+        { q: "_______ Montag habe ich einen Termin beim Arzt.", ar: "حرف جر مع أيام الأسبوع: (يوم الإثنين لدي موعد عند الطبيب)", o: ["Im", "Um", "Am", "Für"], a: 2 },
+        { q: "Die Kinder _______ jetzt schlafen gehen, es ist spät.", o: ["müssen", "muss", "müsst", "wollen"], a: 0 },
+        { q: "Am Telefon fragst du nach Herrn Müller. Was sagst du?", ar: "موقف: على الهاتف تطلب التحدث إلى السيد مولر، ماذا تقول؟", o: ["Wer ist da?", "Auf Wiederhören!", "Ist Herr Müller da?", "Wie geht es Ihnen?"], a: 2 },
+        { q: "Herr und Frau Schmidt _______ nach Berlin fliegen.", o: ["wollen", "will", "wollte", "kann"], a: 0 },
+        { q: "Du beendest ein Telefongespräch. Was sagst du am Ende?", ar: "موقف: تنهي مكالمة هاتفية، ماذا تقول في النهاية؟", o: ["Tschüss!", "Auf Wiedersehen!", "Auf Wiederhören!", "Guten Tag!"], a: 2 },
+        { q: "Ich kann heute nicht kommen, _______ ich habe keine Zeit.", o: ["weil", "dass", "denn", "aber"], a: 2 },
+        { q: "Das Neujahr feiert man mit dem Gruß: _______", ar: "موقف: التهنئة بالعام الجديد تكون بـ:", o: ["Frohes Fest!", "Gutes neues Jahr!", "Alles Gute!", "Gute Reise!"], a: 1 },
+        { q: "Morgen _______ ich nicht arbeiten, ich habe frei.", o: ["muss", "kann", "will", "mussst"], a: 0 },
+        { q: "Du fragst nach dem Weg zum Bahnhof. Was sagst du?", ar: "موقف: تسأل عن الطريق إلى محطة القطار، تقول:", o: ["Wie komme ich zum Bahnhof?", "Wo ist das Kino?", "Fährt dieser Zug nach Kairo?", "Was kostet das Ticket?"], a: 0 },
+        { q: "Sie lernt fleißig, _______ sie die Prüfung bestehen will.", o: ["denn", "dass", "weil", "oder"], a: 2 },
+        { q: "_______ Januar ist es in Deutschland sehr kalt.", o: ["Am", "Um", "Im", "In"], a: 2 },
+        { q: "Peter sagt, _______ er heute keine Hausaufgaben hat.", o: ["weil", "denn", "dass", "wie"], a: 2 },
+        { q: "Du fragst jemanden nach seinem Befinden (الصحة). Was sagst du?", o: ["Wie geht es dir?", "Wie alt bist du?", "Wo wohnst du?", "Was machst du?"], a: 0 },
+        { q: "_______ wie viel Uhr beginnt der Deutschkurs?", o: ["Am", "Im", "Um", "Bis"], a: 2 }
+    ];
+
+    const container = document.getElementById('quiz-wrapper');
+    
+    examQuestions.forEach((item, qIdx) => {
+        const card = document.createElement('div');
+        card.className = 'q-card';
+        card.id = `qcard-${qIdx}`;
+
+        card.innerHTML = `
+            <div class="q-header">
+                <span class="q-tag">Frage السؤال ${qIdx + 1}</span>
+            </div>
+            <div class="q-text">${item.q}</div>
+            ${item.ar ? `<div class="q-text-ar">${item.ar}</div>` : ''}
+            <div class="options-grid">
+                ${item.o.map((opt, oIdx) => `
+                    <label class="option-label" id="label-${qIdx}-${oIdx}">
+                        <input type="radio" name="question-${qIdx}" value="${oIdx}" onchange="updateProgress()">
+                        ${opt}
+                    </label>
+                `).join('')}
+            </div>
+            <div class="feedback-msg" id="feed-${qIdx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    function updateProgress() {
+        const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+        const total = examQuestions.length;
+        document.getElementById('p-bar').style.width = `${(answered / total) * 100}%`;
+    }
+
+    function evaluateQuiz() {
+        let totalScore = 0;
+        
+        examQuestions.forEach((item, qIdx) => {
+            const feed = document.getElementById(`feed-${qIdx}`);
+            const selected = document.querySelector(`input[name="question-${qIdx}"]:checked`);
+            
+            feed.style.display = "block";
+            
+            for(let i=0; i<4; i++) {
+                const lbl = document.getElementById(`label-${qIdx}-${i}`);
+                if(lbl) lbl.classList.remove('correct-answer', 'wrong-answer');
+            }
+
+            if (selected) {
+                const userAns = parseInt(selected.value);
+                if (userAns === item.a) {
+                    totalScore++;
+                    document.getElementById(`label-${qIdx}-${userAns}`).classList.add('correct-answer');
+                    feed.innerHTML = "🎯 Richtig! إجابة صحيحة وممتازة.";
+                    feed.style.color = "var(--green)";
+                } else {
+                    document.getElementById(`label-${qIdx}-${userAns}`).classList.add('wrong-answer');
+                    document.getElementById(`label-${qIdx}-${item.a}`).classList.add('correct-answer');
+                    feed.innerHTML = `❌ Falsch! الإجابة الصحيحة هي: ${item.o[item.a]}`;
+                    feed.style.color = "var(--de-red)";
+                }
+            } else {
+                document.getElementById(`label-${qIdx}-${item.a}`).classList.add('correct-answer');
+                feed.innerHTML = `⚠️ لم يتم الحل. الصحيح هو: ${item.o[item.a]}`;
+                feed.style.color = "var(--de-gold)";
+            }
+        });
+
+        const modal = document.getElementById('result-modal');
+        const scoreDisp = document.getElementById('score-disp');
+        const rankDisp = document.getElementById('rank-disp');
+        
+        scoreDisp.innerText = `${totalScore} / 25`;
+        
+        if(totalScore >= 23) rankDisp.innerText = "Ausgezeichnet! أنت صقر حقيقي في الألماني! 🦅🇩🇪";
+        else if(totalScore >= 18) rankDisp.innerText = "Sehr gut! مستوى رائع، ركز على تريكات الروابط وهتقفل! 🥈";
+        else rankDisp.innerText = "Gut! محتاج تراجع تصريفات الأفعال والمواقف تاني. 📚";
+
+        modal.style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById('result-modal').style.display = "none";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>امتحان الصقر في الدراسات الاجتماعية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #090d16;
+            --card: #131c2e;
+            --gold: #fbbf24;
+            --blue: #38bdf8;
+            --green: #22c55e;
+            --red: #ef4444;
+            --text: #f8fafc;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* شريط التقدم العلوي */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: #1e293b;
+            z-index: 1000;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--gold), var(--blue));
+            transition: width 0.4s ease;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #162238, #0f172a);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            color: var(--gold);
+            font-size: 2.4rem;
+            margin: 0 0 10px 0;
+            font-weight: 900;
+        }
+
+        header p {
+            color: var(--blue);
+            margin: 0;
+            font-size: 1.1rem;
+            font-weight: 700;
+        }
+
+        /* كروت الأسئلة */
+        .q-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid #1e293b;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed rgba(251, 191, 36, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .q-number {
+            background: var(--gold);
+            color: #000;
+            font-weight: 900;
+            padding: 3px 14px;
+            border-radius: 30px;
+            font-size: 0.9rem;
+        }
+
+        .q-text {
+            font-size: 1.25rem;
+            font-weight: 700;
+            line-height: 1.6;
+        }
+
+        /* الخيارات */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .option-label {
+            background: #1a2436;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            font-size: 1.05rem;
+            font-weight: 700;
+        }
+
+        .option-label:hover {
+            background: #223047;
+            border-color: var(--blue);
+            transform: translateY(-2px);
+        }
+
+        .option-label input {
+            margin-left: 12px;
+            transform: scale(1.2);
+            accent-color: var(--gold);
+        }
+
+        /* الألوان التفاعلية بعد الإرسال */
+        .correct-answer {
+            border-color: var(--green) !important;
+            background: rgba(34, 197, 94, 0.15) !important;
+        }
+
+        .wrong-answer {
+            border-color: var(--red) !important;
+            background: rgba(239, 68, 68, 0.15) !important;
+        }
+
+        .feedback-msg {
+            margin-top: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: none;
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        /* زر الإرسال الجاحد */
+        .submit-exam-btn {
+            background: linear-gradient(45deg, var(--blue), #0284c7);
+            color: #fff;
+            border: none;
+            padding: 18px 40px;
+            font-size: 1.5rem;
+            font-weight: 900;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Cairo', sans-serif;
+            box-shadow: 0 10px 25px rgba(56, 189, 248, 0.3);
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-exam-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(56, 189, 248, 0.5);
+        }
+
+        /* الشاشة النهائية (Modal) */
+        #result-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(9, 13, 22, 0.97);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(12px);
+            animation: zoomIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.9); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-content {
+            background: var(--card);
+            padding: 45px;
+            border-radius: 30px;
+            text-align: center;
+            border: 2px solid var(--blue);
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.6);
+        }
+
+        .final-score {
+            font-size: 4.5rem;
+            font-weight: 900;
+            color: var(--gold);
+            margin: 15px 0;
+            text-shadow: 0 0 20px rgba(251, 191, 36, 0.4);
+        }
+
+        .rank-text {
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--text);
+            margin-bottom: 25px;
+        }
+
+        .close-modal-btn {
+            background: #1a2436;
+            color: #fff;
+            border: 1px solid #2d3d5a;
+            padding: 12px 30px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-family: 'Cairo';
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: 0.3s;
+        }
+
+        .close-modal-btn:hover {
+            background: var(--gold);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-container"><div class="progress-bar" id="p-bar"></div></div>
+
+<div class="container">
+    <header>
+        <h1>🧭 التحدي الشامل في الدراسات الاجتماعية</h1>
+        <p>جغرافيا وتاريخ | اختبار قياس مستوى تفاعلي - 25 سؤال</p>
+    </header>
+
+    <div id="quiz-wrapper"></div>
+
+    <button class="submit-exam-btn" onclick="evaluateQuiz()">رصد الدرجات وإظهار النتيجة 📜</button>
+</div>
+
+<div id="result-modal">
+    <div class="modal-content">
+        <h2 style="font-size: 2rem; margin: 0; color: var(--blue);">تقرير الأداء النهائي</h2>
+        <div class="final-score" id="score-disp">0 / 25</div>
+        <div class="rank-text" id="rank-disp">تحليل المستوى...</div>
+        <button class="close-modal-btn" onclick="closeModal()">مراجعة الإجابات الصحيحة والخاطئة</button>
+    </div>
+</div>
+
+<script>
+    // تم ضبط مصفوفة الإجابات لتبدأ دائماً من الرقم 0 (الاختيار الأول هو الصحيح دائماً في مصفوفة الكود البرمجية ويتم عرضه في Grid)
+    const examQuestions = [
+        // جغرافيا
+        { q: "الموطن الأصلي لشجيرة الشاي هو:", o: ["شرق آسيا", "غرب أفريقيا", "أمريكا الجنوبية", "شمال أوروبا"], a: 0 },
+        { q: "تحتل القارة التالية المركز الأول في إنتاج الذرة عالمياً:", o: ["أمريكا الشمالية", "آسيا", "أفريقيا", "أوروبا"], a: 0 },
+        { q: "يصعب استخدام الآلات والأساليب العلمية الحديثة في الزراعة الكثيفة بسبب:", o: ["ضيق مساحة الحقول الزراعية", "قلة الأيدي العاملة", "عدم توفر رؤوس الأموال", "وعورة السطح"], a: 0 },
+        { q: "تخلو قارة أوروبا من زراعة محصول قصب السكر لوقوعها في المنطقة:", o: ["المعتدلة", "المدارية الحارة", "الاستوائية", "القطبية الباردة"], a: 0 },
+        { q: "قلّ عدد الرعاة في دول وسط آسيا بسبب انتشار:", o: ["التعليم وتغير النشاط", "البترول وتوطين البدو", "الصناعات الثقيلة", "الظروف المناخية القاسية"], a: 0 },
+        { q: "تحتل الدولة التالية المركز الأول عالمياً في تربية الأبقار:", o: ["الهند", "الصين", "البرازيل", "الولايات المتحدة"], a: 0 },
+        { q: "تحتل الصين المركز الأول في الإنتاج السمكي في العالم وتنتج حوالي:", o: ["ثلث الإنتاج العالمي", "نصف الإنتاج العالمي", "ربع الإنتاج العالمي", "خمس الإنتاج العالمي"], a: 0 },
+        { q: "الخام الرئيسي لمعدن الألومنيوم هو خام:", o: ["البوكسيت", "الهيماتيت", "الماجنتيت", "النحاس خام"], a: 0 },
+        { q: "تعتبر قارة أوروبا القارة الأولى عالمياً في إنتاج طاقة:", o: ["الغاز الطبيعي والطاقة النووية", "البترول والفحم", "الطاقة الشمسية", "المد والجزر فقط"], a: 0 },
+        { q: "تعد الدولة الأولى عالمياً في إنتاج البترول هي:", o: ["المملكة العربية السعودية", "روسيا", "الولايات المتحدة", "الكويت"], a: 0 },
+        { q: "يعد المحصول الزراعي الاستوائي الذي تصنع منه إطارات السيارات هو:", o: ["المطاط الطبيعي", "الكتان", "الجوت", "القطن"], a: 0 },
+        { q: "تعد الدولة النامية التالية من أهم الدول المصدرة لخام الحديد للعالم:", o: ["موريتانيا", "مصر", "المغرب", "جنوب أفريقيا"], a: 0 },
+
+        // تاريخ
+        { q: "أول إنجاز حققته ثورة 23 يوليو 1952 كان في المجال الاجتماعي وهو:", o: ["إصدار قانون الإصلاح الزراعي", "تأميم قناة السويس", "بناء السد العالي", "إلغاء الملكية"], a: 0 },
+        { q: "تم تمصير البنوك وشركات التأمين في مصر كإحدى نتائج ثورة يوليو في المجال:", o: ["الاقتصادي", "السياسي", "الاجتماعي", "الدولي"], a: 0 },
+        { q: "أصبحت غزة تحت إدارة مصرية مباشرة بعد نهاية:", o: ["حرب فلسطين 1948", "العدوان الثلاثي 1956", "عدوان يونيو 1967", "حرب أكتوبر 1973"], a: 0 },
+        { q: "من أسباب فشل العدوان الثلاثي على مصر عام 1956 تهديد دولة بالتدخل العسكري وهي:", o: ["الاتحاد السوفيتي", "الولايات المتحدة", "ألمانيا", "الصين"], a: 0 },
+        { q: "ترتب على عدوان 5 يونيو 1967 احتلال إسرائيل لهضبة الجولان التابعة لدولة:", o: ["سوريا", "الأردن", "لبنان", "العراق"], a: 0 },
+        { q: "تولى القيادة العامة المشتركة للقوات المصرية والسورية في حرب أكتوبر 1973 المشير:", o: ["أحمد إسماعيل", "سعد الدين الشاذلي", "محمد عبد الغني الجمسي", "عبد المنعم رياض"], a: 0 },
+        { q: "رئيس أركان حرب القوات المسلحة المصرية الذي وضع خطة العبور وتحطيم خط بارليف هو:", o: ["سعد الدين الشاذلي", "أحمد إسماعيل", "محمد عبد الغني الجمسي", "أنور السادات"], a: 0 },
+        { q: "نظمت القوات المسلحة توقيتات العمليات الهجومية في حرب أكتوبر بناءً على تقرير رئيس العمليات:", o: ["محمد عبد الغني الجمسي", "سعد الدين الشاذلي", "أحمد إسماعيل", "عبد المنعم رياض"], a: 0 },
+        { q: "تم استعادة منطقة طابا إلى السيادة المصرية عام 1989 عن طريق:", o: ["التحكيم الدولي (محكمة العدل)", "المفاوضات المباشرة", "القوة العسكرية", "مؤتمر مدريد"], a: 0 },
+        { q: "تم وضع إطار عام للتوصل إلى معاهدة سلام بين مصر وإسرائيل في مؤتمر:", o: ["كامب ديفيد 1978", "مدريد 1991", "أوسلو 1993", "الرباط 1974"], a: 0 },
+        { q: "تعتبر جامعة الدول العربية التي أنشئت عام 1945 منظمة من النوع:", o: ["الإقليمي", "الدولي", "العالمي", "المحلي"], a: 0 },
+        { q: "الجهاز القضائي الأساسي التابع لمنظمة الأمم المتحدة ومقره لاهاي هو:", o: ["محكمة العدل الدولية", "مجلس الأمن", "الأمانة العامة", "الجمعية العامة"], a: 0 },
+        { q: "الجهاز المسؤول عن حفظ الأمن والسلام الدوليين وتملك قراراته سلطة قانونية هو:", o: ["مجلس الأمن", "محكمة العدل", "مجلس الوصاية", "اليونسكو"], a: 0 }
+    ];
+
+    const container = document.getElementById('quiz-wrapper');
+    
+    // بناء كروت الأسئلة
+    examQuestions.forEach((item, qIdx) => {
+        const card = document.createElement('div');
+        card.className = 'q-card';
+        card.id = `qcard-${qIdx}`;
+        
+        card.innerHTML = `
+            <div class="q-header">
+                <span class="q-number">سؤال ${qIdx + 1}</span>
+            </div>
+            <div class="q-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.o.map((opt, oIdx) => `
+                    <label class="option-label" id="label-${qIdx}-${oIdx}">
+                        <input type="radio" name="question-${qIdx}" value="${oIdx}" onchange="updateProgress()">
+                        ${opt}
+                    </label>
+                `).join('')}
+            </div>
+            <div class="feedback-msg" id="feed-${qIdx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    function updateProgress() {
+        const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+        const total = examQuestions.length;
+        document.getElementById('p-bar').style.width = `${(answered / total) * 100}%`;
+    }
+
+    function evaluateQuiz() {
+        let totalScore = 0;
+        
+        examQuestions.forEach((item, qIdx) => {
+            const feed = document.getElementById(`feed-${qIdx}`);
+            const selected = document.querySelector(`input[name="question-${qIdx}"]:checked`);
+            
+            feed.style.display = "block";
+            
+            // إعادة تصفير الألوان
+            for(let i=0; i<4; i++) {
+                const lbl = document.getElementById(`label-${qIdx}-${i}`);
+                if(lbl) lbl.classList.remove('correct-answer', 'wrong-answer');
+            }
+
+            if (selected) {
+                const userAns = parseInt(selected.value);
+                if (userAns === item.a) {
+                    totalScore++;
+                    document.getElementById(`label-${qIdx}-${userAns}`).classList.add('correct-answer');
+                    feed.innerHTML = "🎯 إجابة صحيحة ومثالية!";
+                    feed.style.color = "var(--green)";
+                } else {
+                    document.getElementById(`label-${qIdx}-${userAns}`).classList.add('wrong-answer');
+                    document.getElementById(`label-${qIdx}-${item.a}`).classList.add('correct-answer');
+                    feed.innerHTML = `❌ خطأ. الإجابة الصحيحة هي: ${item.o[item.a]}`;
+                    feed.style.color = "var(--red)";
+                }
+            } else {
+                document.getElementById(`label-${qIdx}-${item.a}`).classList.add('correct-answer');
+                feed.innerHTML = `⚠️ لم تحل السؤال. الصحيح: ${item.o[item.a]}`;
+                feed.style.color = "var(--gold)";
+            }
+        });
+
+        // إظهار تقرير التقييم في المودال
+        const modal = document.getElementById('result-modal');
+        const scoreDisp = document.getElementById('score-disp');
+        const rankDisp = document.getElementById('rank-disp');
+        
+        scoreDisp.innerText = `${totalScore} / 25`;
+        
+        if(totalScore >= 23) rankDisp.innerText = "أنت صقر حقيقي وجاهز لتقفيل المادة! 🦅🥇";
+        else if(totalScore >= 18) rankDisp.innerText = "مستوى رائع جداً، تريكات بسيطة وتجيب الدرجة النهائية! 🥈";
+        else rankDisp.innerText = "محتاج تراجع الملخص وتركز على التواريخ وأسماء القادة! 📚";
+
+        modal.style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById('result-modal').style.display = "none";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

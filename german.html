@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="de" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deutsch Falken | ملخص الألماني</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&family=Poppins:wght@500;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050814;
+            --de-gold: #ffcc00;
+            --de-red: #ff3333;
+            --blue: #22d3ee;
+            --card-bg: rgba(15, 23, 42, 0.85);
+        }
+
+        body {
+            margin: 0; padding: 0;
+            font-family: 'Cairo', 'Poppins', sans-serif;
+            background: url('bg7.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: #f8fafc;
+        }
+
+        .glass-layer {
+            min-height: 100vh;
+            background: rgba(5, 8, 20, 0.93);
+            backdrop-filter: blur(8px);
+            padding: 50px 20px;
+        }
+
+        .container { max-width: 1100px; margin: auto; }
+
+        header {
+            text-align: center; margin-bottom: 50px;
+            border-bottom: 3px solid var(--de-gold); padding-bottom: 25px;
+        }
+
+        header h1 { font-size: 3rem; color: var(--de-gold); margin: 0; font-weight: 900; }
+        header p { font-size: 1.2rem; color: #cbd5e1; margin-top: 10px; }
+
+        .grid-sections {
+            display: grid; grid-template-columns: 1fr 1fr; gap: 35px;
+        }
+
+        @media (max-width: 900px) { .grid-sections { grid-template-columns: 1fr; } }
+
+        .section-box {
+            background: var(--card-bg); border-radius: 20px; padding: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+        }
+
+        .section-title {
+            background: linear-gradient(45deg, var(--de-red), #cc0000);
+            color: #fff; padding: 10px 25px; border-radius: 50px;
+            font-weight: 900; font-size: 1.3rem; display: inline-block; margin-bottom: 25px;
+        }
+
+        .topic-card {
+            background: rgba(0,0,0,0.4); margin-bottom: 20px; padding: 18px;
+            border-right: 5px solid var(--de-gold); border-radius: 10px;
+        }
+
+        .topic-card h3 { margin: 0 0 12px 0; color: var(--blue); font-size: 1.3rem; }
+        
+        ul { padding-right: 20px; margin: 5px 0; }
+        li { margin-bottom: 8px; font-size: 1.05rem; line-height: 1.6; color: #e2e8f0; }
+        li b { color: var(--de-gold); }
+
+        .important-note {
+            background: rgba(255, 51, 51, 0.1); border: 1px solid rgba(255, 51, 51, 0.2);
+            padding: 12px; border-radius: 8px; margin-top: 10px; font-size: 0.95rem;
+        }
+        .important-note b { color: var(--de-red); }
+
+        /* بوابة الامتحان */
+        .exam-portal {
+            width: 100%; padding: 45px 20px; text-align: center;
+            background: rgba(15, 23, 42, 0.8); border: 2px dashed var(--de-gold);
+            border-radius: 20px; margin-top: 50px; box-shadow: 0 15px 30px rgba(0,0,0,0.4); box-sizing: border-box;
+        }
+
+        .exam-btn {
+            display: inline-block; padding: 18px 50px; background: transparent;
+            color: var(--de-gold); font-size: 1.7rem; font-weight: 900; text-decoration: none;
+            border: 3px solid var(--de-gold); border-radius: 50px; position: relative;
+            transition: 0.4s; overflow: hidden; z-index: 1;
+        }
+
+        .exam-btn:hover { color: #000; box-shadow: 0 0 30px var(--de-gold); transform: scale(1.05); }
+        .exam-btn::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%;
+            background: var(--de-gold); transition: 0.4s; z-index: -1;
+        }
+        .exam-btn:hover::before { left: 0; }
+
+        footer { text-align: center; margin-top: 50px; color: var(--de-gold); font-weight: 700; }
+    </style>
+</head>
+<body>
+
+<div class="glass-layer">
+    <div class="container">
+        <header>
+            <h1>🇩🇪 Deutsch-Falke | موسوعة الألماني</h1>
+            <p>المراجعة النهائية الشاملة لقواعد ومواقف الصف الثالث الإعدادي</p>
+        </header>
+
+        <div class="grid-sections">
+            
+            <div class="section-box">
+                <div class="section-title">📝 أولاً: القواعد الأساسية (Grammatik)</div>
+                
+                <div class="topic-card">
+                    <h3>⚙️ الأفعال الناقصة (Modalverben)</h3>
+                    <ul>
+                        <li><b>müssen (يجب):</b> للواجبات والالتزامات القوية.<br><i>Ex: Ich <b>muss</b> für die Prüfung lernen.</i></li>
+                        <li><b>können (يستطيع):</b> للقدرة أو الإمكانية.<br><i>Ex: Er <b>kann</b> gut Deutsch sprechen.</i></li>
+                        <li><b>wollen (يريد):</b> للتعبير عن الإرادة أو النية المستقرة.<br><i>Ex: Wir <b>wollen</b> nach Hamburg fliegen.</i></li>
+                    </ul>
+                    <div class="important-note"><b>تذكير هام:</b> تصريف الفعل الناقص مع (ich) هو نفسه مع (er/sie/es) تماماً! (Ich muss / Er muss). والفعل الأساسي يوضع في <b>آخر الجملة في المصدر</b>.</div>
+                </div>
+
+                <div class="topic-card">
+                    <h3>🔗 الروابط وجمل المفعول (Konjunktionen)</h3>
+                    <ul>
+                        <li><b>weil (لأن):</b> ترتبط بالسبب وتدفع الفعل المصرف إلى <b>نهاية الجملة</b>.<br><i>Ex: Ich bleibe im Bett, <b>weil</b> ich krank <b>bin</b>.</i></li>
+                        <li><b>dass (أنّ):</b> جملة مفعول به وتدفع الفعل أيضاً إلى <b>نهاية الجملة</b>.<br><i>Ex: Ich glaube, <b>dass</b> der Film super <b>ist</b>.</i></li>
+                        <li><b>denn (لأن):</b> تأتي في الترتيب صفر ولا تغير ترتيب الجملة (الفعل في المركز 2).<br><i>Ex: Ich lerne, <b>denn</b> ich <b>habe</b> eine Prüfung.</i></li>
+                    </ul>
+                </div>
+
+                <div class="topic-card">
+                    <h3>📅 حروف الجر الزمانية (Temporale Präpositionen)</h3>
+                    <ul>
+                        <li><b>um:</b> تأتي مع الساعات فقط (الساعة كم؟ ← ?Um wie viel Uhr).</li>
+                        <li><b>am:</b> تأتي مع أيام الأسبوع وأوقات اليوم والتاريخ (am Montag / am Morgen).</li>
+                        <li><b>im:</b> تأتي مع فصول السنة والشهور (im Sommer / im Januar).</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="section-box">
+                <div class="section-title">🗣️ ثانياً: المواقف اليومية والكلمات</div>
+                
+                <div class="topic-card" style="border-right-color: var(--de-red);">
+                    <h3>📞 مواقف التليفون والتهنئة (Alltagssituationen)</h3>
+                    <ul>
+                        <li><b>عند التهنئة بعيد الميلاد:</b> تقول: <i>Alles Gute zum Geburtstag!</i></li>
+                        <li><b>عند التهنئة بالعام الجديد أو العيد:</b> تقول: <i>Frohes Fest! / Gutes neues Jahr!</i></li>
+                        <li><b>السؤال عن الصحة (?Gesundheit):</b> تسأل بـ <i>?Wie geht es dir</i> والإجابة <i>Danke, gut.</i></li>
+                        <li><b>على الهاتف (Am Telefon):</b> لطلب شخص ما تقول: <i>?Ist Herr Müller da</i> وعند إنهاء المكالمة: <i>Auf Wiederhören!</i></li>
+                    </ul>
+                </div>
+
+                <div class="topic-card" style="border-right-color: var(--de-red);">
+                    <h3>🛒 التسوق والطقس (Einkauf & Wetter)</h3>
+                    <ul>
+                        <li><b>السؤال عن السعر (?Preis):</b> تسأل بـ <i>?Wie viel kostet das / ?Was kostet das</i></li>
+                        <li><b>السؤال عن الطقس (?Wetter):</b> تسأل بـ <i>?Wie ist das Wetter heute</i> والإجابة <i>Es ist sonnig / kalt.</i></li>
+                        <li><b>السؤال عن الطريق (?Weg):</b> تسأل بـ <i>?Wie komme ich zum Bahnhof</i></li>
+                    </ul>
+                </div>
+
+                <div class="topic-card" style="border-right-color: var(--de-red);">
+                    <h3>🎒 أهم المفردات (Wichtige Wörter)</h3>
+                    <ul>
+                        <li><b>der Beruf:</b> الوظيفة | <b>die Freizeit:</b> وقت الفراغ</li>
+                        <li><b>das Hobby:</b> الهواية | <b>die Einladung:</b> الدعوة</li>
+                        <li><b>krank:</b> مريض | <b>gesund:</b> معافى / بصحة جيدة</li>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="exam-portal">
+            <h2 style="color: var(--de-gold); font-size: 2.2rem; margin-top: 0; margin-bottom: 10px;">ظبطت الـ Grammatik والمواقف؟ 🇩🇪</h2>
+            <p style="color: #94a3b8; margin-bottom: 30px; font-size: 1.15rem;">ادخل دلوقتي على تحدي الألماني واقفل الدرجات كاملة.</p>
+            <a href="german_exam.html" class="exam-btn">
+                🏁 Start Deutsch-Quiz
+            </a>
+        </div>
+
+        <footer>
+            <p>Prepared by Al-Saqr Team | 2026 🦅</p>
+        </footer>
+    </div>
+</div>
+
+</body>
+</html>

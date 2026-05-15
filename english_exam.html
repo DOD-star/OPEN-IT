@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>English Comprehensive Exam | Al-Saqr</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&family=Cairo:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #060b18;
+            --card: #111b30;
+            --blue: #00d2ff;
+            --purple: #a855f7;
+            --green: #10b981;
+            --red: #ef4444;
+            --text: #f8fafc;
+            --gold: #f59e0b;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Poppins', 'Cairo', sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+        }
+
+        /* شريط التقدم */
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: #1e293b;
+            z-index: 1000;
+        }
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, var(--blue), var(--purple));
+            transition: width 0.3s ease;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: 60px auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #0f172a, #1e1b4b);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid rgba(0, 210, 255, 0.2);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        header h1 {
+            color: var(--blue);
+            font-size: 2.6rem;
+            margin: 0 0 10px 0;
+            font-weight: 800;
+        }
+
+        header p {
+            color: var(--gold);
+            margin: 0;
+            font-size: 1.15rem;
+            font-weight: 700;
+        }
+
+        /* كروت الأسئلة */
+        .q-card {
+            background: var(--card);
+            border-radius: 20px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+
+        .q-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            border-bottom: 1px dashed rgba(0, 210, 255, 0.2);
+            padding-bottom: 10px;
+        }
+
+        .q-tag {
+            font-weight: 800;
+            padding: 4px 15px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            text-transform: uppercase;
+        }
+        .tag-main { background: var(--blue); color: #000; }
+        .tag-plus { background: var(--purple); color: #fff; }
+
+        .q-text {
+            font-size: 1.25rem;
+            font-weight: 600;
+            line-height: 1.6;
+        }
+
+        /* خيارات الإجابة */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
+            margin-top: 20px;
+        }
+
+        .option-label {
+            background: #16223f;
+            padding: 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            border: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            transition: all 0.2s ease;
+            font-size: 1.05rem;
+            font-weight: 600;
+        }
+
+        .option-label:hover {
+            background: #1c2b4f;
+            border-color: var(--blue);
+            transform: translateY(-2px);
+        }
+
+        .option-label input {
+            margin-right: 12px;
+            transform: scale(1.2);
+            accent-color: var(--blue);
+        }
+
+        /* فئات الألوان عند التصحيح */
+        .correct-answer {
+            border-color: var(--green) !important;
+            background: rgba(16, 185, 129, 0.15) !important;
+        }
+
+        .wrong-answer {
+            border-color: var(--red) !important;
+            background: rgba(239, 68, 68, 0.15) !important;
+        }
+
+        .feedback-msg {
+            margin-top: 15px;
+            font-weight: 700;
+            font-size: 1rem;
+            display: none;
+        }
+
+        .submit-btn {
+            background: linear-gradient(45deg, var(--blue), var(--purple));
+            color: #fff;
+            border: none;
+            padding: 20px 40px;
+            font-size: 1.5rem;
+            font-weight: 800;
+            border-radius: 50px;
+            cursor: pointer;
+            width: 100%;
+            font-family: 'Poppins', sans-serif;
+            box-shadow: 0 10px 25px rgba(168, 85, 247, 0.3);
+            transition: 0.3s;
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: scale(1.02);
+            box-shadow: 0 15px 35px rgba(0, 210, 255, 0.5);
+        }
+
+        /* شاشة عرض النتيجة */
+        #result-modal {
+            position: fixed;
+            inset: 0;
+            background: rgba(6, 11, 24, 0.98);
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            backdrop-filter: blur(15px);
+            animation: zoomIn 0.4s ease-out;
+        }
+
+        @keyframes zoomIn {
+            from { opacity: 0; transform: scale(0.95); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        .modal-content {
+            background: var(--card);
+            padding: 50px;
+            border-radius: 30px;
+            text-align: center;
+            border: 2px solid var(--purple);
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.6);
+        }
+
+        .final-score {
+            font-size: 5rem;
+            font-weight: 800;
+            color: var(--gold);
+            margin: 20px 0;
+            text-shadow: 0 0 25px rgba(245, 158, 11, 0.4);
+        }
+
+        .rank-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 30px;
+        }
+
+        .close-btn {
+            background: #16223f;
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 12px 35px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-family: 'Poppins';
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .close-btn:hover {
+            background: var(--blue);
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+
+<div class="progress-container"><div class="progress-bar" id="p-bar"></div></div>
+
+<div class="container">
+    <header>
+        <h1>English Comprehensive Challenge</h1>
+        <p>25 Questions Covering New Hello & Hello Plus</p>
+    </header>
+
+    <div id="quiz-wrapper"></div>
+
+    <button class="submit-btn" onclick="evaluateQuiz()">Submit Exam & Show Report 📜</button>
+</div>
+
+<div id="result-modal">
+    <div class="modal-content">
+        <h2 style="font-size: 2rem; margin: 0; color: var(--blue);">Performance Report</h2>
+        <div class="final-score" id="score-disp">0 / 25</div>
+        <div class="rank-text" id="rank-disp">Analyzing...</div>
+        <button class="close-btn" onclick="closeModal()">Review Answers</button>
+    </div>
+</div>
+
+<script>
+    const examQuestions = [
+        // New Hello Section
+        { type: "main", q: "A lot of plastic waste __________ into the oceans every year.", o: ["is thrown", "throws", "was thrown", "is throwing"], a: 0 },
+        { type: "main", q: "If we continue cutting down forests, climate change __________ worse.", o: ["will get", "gets", "would get", "got"], a: 0 },
+        { type: "main", q: "The telescope is an instrument __________ is used to look at stars.", o: ["which", "who", "where", "whose"], a: 0 },
+        { type: "main", q: "Our car broke down because we __________ for five hours without stopping.", o: ["had been driving", "driven", "have driven", "drive"], a: 0 },
+        { type: "main", q: "Many endangered species live in the wetland __________.", o: ["habitat", "habit", "hobby", "heritage"], a: 0 },
+        { type: "main", q: "The ancient temple __________ by thousands of tourists last year.", o: ["was visited", "is visited", "visited", "was visiting"], a: 0 },
+        { type: "main", q: "I __________ have sugar in my tea, but now I prefer it without sugar.", o: ["used to", "use to", "am used to", "uses to"], a: 0 },
+        { type: "main", q: "Before reaching the station, the train __________.", o: ["had already left", "leaves", "has left", "was leaving"], a: 0 },
+        { type: "main", q: "Solar and wind power are examples of __________ energy.", o: ["renewable", "fossil", "expensive", "limited"], a: 0 },
+        { type: "main", q: "He said that he __________ his grandparents the following week.", o: ["would visit", "visits", "visited", "will visit"], a: 0 },
+        { type: "main", q: "A __________ is a person who checks and corrects articles before printing.", o: ["editor", "journalist", "photographer", "newsreader"], a: 0 },
+        { type: "main", q: "If I __________ more money, I would buy that expensive laptop.", o: ["had", "have", "will have", "had had"], a: 0 },
+        { type: "main", q: "The match __________ because of the heavy rain yesterday.", o: ["was cancelled", "cancelled", "is cancelled", "cancels"], a: 0 },
+
+        // Hello Plus Section
+        { type: "plus", q: "Look at those thick dark clouds! It __________ rain heavily very soon.", o: ["is going to", "will", "might", "shall"], a: 0 },
+        { type: "plus", q: "The witness denied __________ any suspicious movement near the bank.", o: ["seeing", "to see", "seen", "to seeing"], a: 0 },
+        { type: "plus", q: "He is completely exhausted; he __________ have been working all night long.", o: ["must", "can't", "might", "should"], a: 0 },
+        { type: "plus", q: "This is the scientist __________ research changed the field of robotics.", o: ["whose", "who", "whom", "which"], a: 0 },
+        { type: "plus", q: "The manager demanded to know __________ had authorized the transaction.", o: ["who", "which", "whom", "whose"], a: 0 },
+        { type: "plus", q: "Deforestation leads to a massive loss in global __________, threatening many species.", o: ["biodiversity", "biography", "biology", "biochemistry"], a: 0 },
+        { type: "plus", q: "The teacher warned the students __________ their time during the vacation.", o: ["not to waste", "to not waste", "don't waste", "not wasting"], a: 0 },
+        { type: "plus", q: "The pyramids are a magnificent example of Egypt's architectural __________.", o: ["heritage", "habitat", "horizon", "harmony"], a: 0 },
+        { type: "plus", q: "She apologized for __________ late to the critical board meeting.", o: ["arriving", "to arrive", "arrived", "to arriving"], a: 0 },
+        { type: "plus", q: "His argument was so __________ that the entire committee voted in his favor.", o: ["convincing", "confusing", "complicated", "careless"], a: 0 },
+        { type: "plus", q: "You __________ have packed so many heavy winter clothes; the weather here is quite warm.", o: ["needn't", "mustn't", "can't", "couldn't"], a: 0 },
+        { type: "plus", q: "The new city design focuses heavily on __________ systems to reduce carbon emissions.", o: ["sustainable", "temporary", "fossil", "traditional"], a: 0 }
+    ];
+
+    const container = document.getElementById('quiz-wrapper');
+    
+    examQuestions.forEach((item, qIdx) => {
+        const card = document.createElement('div');
+        card.className = 'q-card';
+        card.id = `qcard-${qIdx}`;
+        
+        const tagText = item.type === "main" ? "New Hello" : "Hello Plus";
+        const tagClass = item.type === "main" ? "tag-main" : "tag-plus";
+
+        card.innerHTML = `
+            <div class="q-header">
+                <span class="q-tag ${tagClass}">${tagText} - Q ${qIdx + 1}</span>
+            </div>
+            <div class="q-text">${item.q}</div>
+            <div class="options-grid">
+                ${item.o.map((opt, oIdx) => `
+                    <label class="option-label" id="label-${qIdx}-${oIdx}">
+                        <input type="radio" name="question-${qIdx}" value="${oIdx}" onchange="updateProgress()">
+                        ${opt}
+                    </label>
+                `).join('')}
+            </div>
+            <div class="feedback-msg" id="feed-${qIdx}"></div>
+        `;
+        container.appendChild(card);
+    });
+
+    function updateProgress() {
+        const answered = document.querySelectorAll('input[type="radio"]:checked').length;
+        const total = examQuestions.length;
+        document.getElementById('p-bar').style.width = `${(answered / total) * 100}%`;
+    }
+
+    function evaluateQuiz() {
+        let totalScore = 0;
+        
+        examQuestions.forEach((item, qIdx) => {
+            const feed = document.getElementById(`feed-${qIdx}`);
+            const selected = document.querySelector(`input[name="question-${qIdx}"]:checked`);
+            
+            feed.style.display = "block";
+            
+            for(let i=0; i<4; i++) {
+                const lbl = document.getElementById(`label-${qIdx}-${i}`);
+                if(lbl) lbl.classList.remove('correct-answer', 'wrong-answer');
+            }
+
+            if (selected) {
+                const userAns = parseInt(selected.value);
+                if (userAns === item.a) {
+                    totalScore++;
+                    document.getElementById(`label-${qIdx}-${userAns}`).classList.add('correct-answer');
+                    feed.innerHTML = "🎯 Correct Answer!";
+                    feed.style.color = "var(--green)";
+                } else {
+                    document.getElementById(`label-${qIdx}-${userAns}`).classList.add('wrong-answer');
+                    document.getElementById(`label-${qIdx}-${item.a}`).classList.add('correct-answer');
+                    feed.innerHTML = `❌ Wrong. Correct is: ${item.o[item.a]}`;
+                    feed.style.color = "var(--red)";
+                }
+            } else {
+                document.getElementById(`label-${qIdx}-${item.a}`).classList.add('correct-answer');
+                feed.innerHTML = `⚠️ Not Answered. Correct is: ${item.o[item.a]}`;
+                feed.style.color = "var(--gold)";
+            }
+        });
+
+        const modal = document.getElementById('result-modal');
+        const scoreDisp = document.getElementById('score-disp');
+        const rankDisp = document.getElementById('rank-disp');
+        
+        scoreDisp.innerText = `${totalScore} / 25`;
+        
+        if(totalScore >= 23) rankDisp.innerText = "Excellent! You are a certified English Eagle! 🦅🥇";
+        else if(totalScore >= 18) rankDisp.innerText = "Great job! A few more reviews and you'll perfect it! 🥈";
+        else rankDisp.innerText = "Good try! Make sure to review the grammar boxes in the summary. 📚";
+
+        modal.style.display = "flex";
+    }
+
+    function closeModal() {
+        document.getElementById('result-modal').style.display = "none";
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+</script>
+
+</body>
+</html>

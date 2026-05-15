@@ -3,210 +3,162 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gamer Registration</title>
+    <title>Education Hub | تالتة إعدادي</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.rtl.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
     <style>
-        /* أنيميشن للخلفية */
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
+        :root { --primary: #00d2ff; --secondary: #3a7bd5; }
         body {
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: linear-gradient(-45deg, #0f0c29, #302b63, #24243e, #0b0e1a);
-            background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            color: white;
-            overflow: hidden;
+            font-family: 'Cairo', sans-serif;
+            background: linear-gradient(rgba(15,12,41,0.9), rgba(15,12,41,0.9)), url('bg.jpg');
+            background-size: cover; background-attachment: fixed; color: white;
         }
-
-        .main-container {
-            background: rgba(22, 27, 42, 0.9);
-            backdrop-filter: blur(10px);
-            padding: 40px;
-            border-radius: 30px;
-            width: 400px;
-            border: 2px solid #00d2ff;
-            box-shadow: 0 0 20px #00d2ff66;
-            text-align: center;
-            z-index: 10;
+        .header-brand { padding: 30px; text-align: right; }
+        .main-logo { width: 220px; filter: drop-shadow(0 0 15px var(--primary)); }
+        .marquee-wrapper { background: rgba(255,255,255,0.1); backdrop-filter: blur(10px); padding: 12px 0; border-y: 1px solid var(--primary); }
+        .subject-card {
+            background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 25px; padding: 30px; transition: 0.4s; text-align: center; height: 100%;
         }
-
-        h1 { font-size: 28px; margin-bottom: 20px; text-shadow: 0 0 10px #00d2ff; }
-
-        .input-group { margin-bottom: 15px; text-align: right; }
+        .subject-card:hover { transform: translateY(-10px); border-color: var(--primary); box-shadow: 0 0 20px rgba(0, 210, 255, 0.2); }
+        .btn-go { background: linear-gradient(45deg, var(--primary), var(--secondary)); border: none; color: white; font-weight: 800; border-radius: 12px; width: 100%; padding: 12px; text-decoration: none; display: block; margin-top: 15px; }
         
-        label { display: block; margin-bottom: 5px; font-size: 14px; color: #00d2ff; }
-
-        input, select {
-            width: 100%;
-            padding: 12px;
-            border-radius: 10px;
-            border: 1px solid #2d3446;
-            background: #0b0e1a;
-            color: white;
-            outline: none;
-            box-sizing: border-box;
+        /* إضافات ستايل الفيديوهات المتناسقة */
+        .video-card {
+            background: rgba(15, 23, 42, 0.6); border: 1px dashed rgba(0, 210, 255, 0.3);
+            border-radius: 20px; padding: 20px; transition: 0.3s; text-align: center; height: 100%;
         }
-
-        .img-upload {
-            width: 100px;
-            height: 100px;
-            border: 2px dashed #9d50bb;
-            border-radius: 50%;
-            margin: 0 auto 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            overflow: hidden;
-            background: #1a1a2e;
-            position: relative;
-        }
-
-        .img-upload img { 
-            width: 100%; 
-            height: 100%; 
-            object-fit: cover; 
-            display: none; 
-        }
-
-        #plus { font-size: 30px; color: #9d50bb; }
-
-        .play-btn {
-            background: linear-gradient(90deg, #00d2ff, #9d50bb);
-            color: white;
-            border: none;
-            padding: 15px 40px;
-            border-radius: 50px;
-            font-size: 20px;
-            font-weight: bold;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            margin-top: 10px;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-        }
-
-        .play-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px #9d50bb;
-        }
+        .video-card:hover { border-color: var(--primary); box-shadow: 0 5px 15px rgba(0, 210, 255, 0.15); }
+        .video-icon { font-size: 2rem; margin-bottom: 10px; display: inline-block; }
+        .btn-video { background: #ff0055; border: none; color: white; font-weight: 700; border-radius: 10px; width: 100%; padding: 10px; text-decoration: none; display: block; margin-top: 15px; transition: 0.3s; cursor: pointer; }
+        .btn-video:hover { background: #ff3377; box-shadow: 0 0 10px rgba(255, 0, 85, 0.5); color: white; }
     </style>
 </head>
 <body>
-
-    <div class="main-container">
-        <h1>CREATE PROFILE</h1>
-
-        <div class="img-upload" onclick="document.getElementById('hiddenFile').click()">
-            <span id="plus">+</span>
-            <img id="userAvatar" src="" alt="avatar">
-        </div>
-        <input type="file" id="hiddenFile" hidden accept="image/*">
-
-        <div class="input-group">
-            <label>Nickname</label>
-            <input type="text" id="nickName" placeholder="Enter your name...">
-        </div>
-
-        <div class="input-group">
-            <label>Country</label>
-            <input type="text" id="userCountry" placeholder="Egypt, KSA, etc...">
+    <div class="header-brand"><img src="my-logo.png" alt="Logo" class="main-logo"></div>
+    <div class="marquee-wrapper mb-5">
+        <marquee scrollamount="10">❤️ شكر خاص لمستر طه رمضان على مجهوده العظيم معنا ❤️ | كل ملخصات الترم التاني متاحة الآن  | دفعة 2026 🚀</marquee>
+    </div>
+    <div class="container pb-5">
+        <h1 class="text-center mb-5 fw-bold">الشهادة الإعدادية - <span style="color:var(--primary)">ترم تاني</span></h1>
+        <div class="row g-4">
+            <div class="col-md-4"><div class="subject-card"><div>🧪</div><h3>Science - العلوم</h3><a href="science.html" class="btn-go">الملخص</a></div></div>
+            <div class="col-md-4"><div class="subject-card"><div>📐</div><h3>Math - الرياضيات</h3><a href="math.html" class="btn-go">الملخص</a></div></div>
+            <div class="col-md-4"><div class="subject-card"><div>📖</div><h3>Arabic - العربي</h3><a href="arabic.html" class="btn-go">الملخص</a></div></div>
+            <div class="col-md-4"><div class="subject-card"><div>🗺️</div><h3>Social - الدراسات</h3><a href="social.html" class="btn-go">الملخص</a></div></div>
+            <div class="col-md-4"><div class="subject-card"><div>🇬🇧</div><h3>English - إنجليزي</h3><a href="english.html" class="btn-go">الملخص</a></div></div>
+            <div class="col-md-4"><div class="subject-card"><div>🇩🇪</div><h3>Deutsch - ألماني</h3><a href="german.html" class="btn-go">الملخص</a></div></div>
         </div>
 
-        <div class="input-group">
-            <label>Gender</label>
-            <select id="userGender">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-            </select>
+        <h2 class="text-center mt-5 pt-5 mb-4 fw-bold" style="color: var(--primary);">المحاضرات والمراجعات المرئية 📺</h2>
+        <p class="text-center text-muted mb-5">أقوى شروحات اليوتيوب لتقفيل مواد الترم الثاني</p>
+        
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="video-card">
+                    <span class="video-icon">🎬</span>
+                    <h4>مراجعة ليلة الامتحان | لغة عربية</h4>
+                    <p class="text-muted small">شرح فروع النحو والنصوص والقراءة كاملة</p>
+                    <button class="btn-video" onclick="openVideoModal('arabic.mp4')">شاهد المحاضرة 🍿</button>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="video-card">
+                    <span class="video-icon">🌍</span>
+                    <h4>خرائط وتريكات | الدراسات الاجتماعية</h4>
+                    <p class="text-muted small">تجميعة كل تريكات الجغرافيا والتاريخ المضمونة</p>
+                    <button class="btn-video" onclick="openVideoModal('social.mp4')">شاهد المحاضرة 🍿</button>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="video-card">
+                    <span class="video-icon">🗣️</span>
+                    <h4>ليلة الامتحان | English Mix</h4>
+                    <p class="text-muted small">شرح قواعد New Hello & Hello Plus بالتفصيل</p>
+                    <button class="btn-video" onclick="openVideoModal('english.mp4')">شاهد المحاضرة 🍿</button>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="video-card">
+                    <span class="video-icon">⚡</span>
+                    <h4>المراجعة النهائية | Science</h4>
+                    <p class="text-muted small">شرح المعادلات الكهربية والفيزياء الإعدادية</p>
+                    <button class="btn-video" onclick="openVideoModal('science.mp4')">شاهد المحاضرة 🍿</button>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="video-card">
+                    <span class="video-icon">📊</span>
+                    <h4>حل متوقعات الوزارة | الرياضيات</h4>
+                    <p class="text-muted small">أفكار الجبر والهندسة التحليلية المتقدمة</p>
+                    <button class="btn-video" onclick="openVideoModal('math.mp4')">شاهد المحاضرة 🍿</button>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="video-card">
+                    <span class="video-icon">🏰</span>
+                    <h4>الـ Deutsch في جيبك | لغة ألمانية</h4>
+                    <p class="text-muted small">تجميعة المواقف والروابط الأساسية في فيديو واحد</p>
+                    <button class="btn-video" onclick="openVideoModal('german.mp4')">شاهد المحاضرة 🍿</button>
+                </div>
+            </div>
+        </div>
         </div>
 
-        <button class="play-btn" id="saveBtn" onclick="saveAndPlay()">SAVE & PLAY</button>
+    <div class="modal fade" id="customVideoModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content bg-dark border-secondary">
+                <div class="modal-header border-bottom border-secondary">
+                    <h5 class="modal-title text-white">مشغل المحاضرات 📺</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close" onclick="stopVideo()"></button>
+                </div>
+                <div class="modal-body p-0 text-center">
+                    <video id="modalVideoPlayer" class="w-100" controls style="max-height: 500px;">
+                        <source id="videoSource" src="" type="video/mp4">
+                        متصفحك لا يدعم تشغيل هذا الفيديو.
+                    </video>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-database.js"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        const firebaseConfig = {
-          apiKey: "AIzaSyDCRXJY0Ve5YZIXOOnTVIwU9T1zpCSX-Cs",
-          authDomain: "game-745d3.firebaseapp.com",
-          databaseURL: "https://game-745d3-default-rtdb.firebaseio.com",
-          projectId: "game-745d3",
-          storageBucket: "game-745d3.firebasestorage.app",
-          messagingSenderId: "907334488624",
-          appId: "1:907334488624:web:efb34e82fa22c1fbb313f5"
-        };
+        let videoModalInstance = null;
 
-        // تشغيل وإجبار السيرفر يفتح فوراً
-        if (!firebase.apps.length) {
-            firebase.initializeApp(firebaseConfig);
-        }
-        const database = firebase.database();
-        database.goOnline(); // أهم سطر لفك التهنيج
-
-        const fileInput = document.getElementById('hiddenFile');
-        const userAvatar = document.getElementById('userAvatar');
-        const plusSign = document.getElementById('plus');
-
-        fileInput.onchange = function() {
-            const file = fileInput.files[0];
-            if (file) {
-                const reader = new FileReader();
-                reader.onload = function(e) {
-                    const base64Image = e.target.result;
-                    userAvatar.src = base64Image;
-                    userAvatar.style.display = 'block';
-                    plusSign.style.display = 'none';
-                    localStorage.setItem('savedImg', base64Image);
-                }
-                reader.readAsDataURL(file);
+        function openVideoModal(videoFile) {
+            const player = document.getElementById('modalVideoPlayer');
+            const source = document.getElementById('videoSource');
+            
+            // تغيير مسار الفيديو بناءً على المادة المطلوبة
+            source.src = videoFile;
+            player.load();
+            
+            // فتح الشاشة المنبثقة
+            if(!videoModalInstance) {
+                videoModalInstance = new bootstrap.Modal(document.getElementById('customVideoModal'));
             }
+            videoModalInstance.show();
+            
+            // تشغيل تلقائي أول ما يفتح
+            player.play().catch(error => console.log("Auto-play blocked by browser."));
         }
 
-        function saveAndPlay() {
-            const btn = document.getElementById('saveBtn');
-            const name = document.getElementById('nickName').value.trim();
-            const country = document.getElementById('userCountry').value.trim();
-            const gender = document.getElementById('userGender').value;
-            const img = localStorage.getItem('savedImg') || "";
-
-            if(!name || !country) {
-                alert("يا وحش املأ البيانات الأول! 😂");
-                return;
-            }
-
-            btn.innerText = "SAVING...";
-            btn.disabled = true;
-
-            // الحفظ مع إضافة "Error Catching" عشان لو السيرفر رفض يقولنا ليه
-            database.ref('players/' + name).set({
-                nickname: name,
-                country: country,
-                gender: gender,
-                avatar: img,
-                status: "online"
-            }, (error) => {
-                if (error) {
-                    alert("السيرفر رفض الحفظ: " + error.message);
-                    btn.innerText = "SAVE & PLAY";
-                    btn.disabled = false;
-                } else {
-                    localStorage.setItem('playerName', name);
-                    window.location.href = "play.html";
-                }
-            });
+        function stopVideo() {
+            const player = document.getElementById('modalVideoPlayer');
+            player.pause();
+            player.currentTime = 0;
         }
+
+        // إيقاف الفيديو لو المستخدم داس بره الشاشة عشان يقفلها
+        document.getElementById('customVideoModal').addEventListener('hidden.bs.modal', function () {
+            stopVideo();
+        });
     </script>
 </body>
 </html>

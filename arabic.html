@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>منهج اللغة العربية | الشهادة الإعدادية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0d1117; --card: #161b22; --accent: #ffd700; --blue: #58a6ff; --text: #e6edf3; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; margin: 0; padding: 0; }
+        .container { max-width: 1000px; margin: 40px auto; padding: 20px; }
+        
+        header { text-align: center; border-bottom: 2px solid var(--blue); padding-bottom: 20px; margin-bottom: 40px; }
+        h1 { color: var(--blue); font-size: 2.5rem; margin: 0; }
+        
+        .section-title { background: var(--blue); color: #000; padding: 10px 20px; border-radius: 8px; display: inline-block; margin-top: 30px; font-weight: 900; }
+        
+        .lesson-card { background: var(--card); border-radius: 12px; padding: 20px; margin-top: 20px; border-right: 5px solid var(--accent); }
+        .lesson-card h3 { color: var(--accent); margin-top: 0; }
+        
+        .summary-box { background: #00000033; padding: 15px; border-radius: 8px; margin-top: 10px; border: 1px dashed #444; }
+        .q-box { color: #8bc34a; font-weight: bold; margin-top: 10px; }
+        
+        .nav-pills { display: flex; justify-content: center; gap: 15px; margin-bottom: 20px; flex-wrap: wrap; }
+        .pill { background: #21262d; padding: 8px 20px; border-radius: 20px; cursor: pointer; border: 1px solid #444; transition: 0.3s; }
+        .pill:hover { background: var(--blue); color: #000; }
+
+        footer { text-align: center; margin-top: 50px; padding: 20px; color: #8b949e; border-top: 1px solid #30363d; }
+
+        /* تنسيق كارت القصة الملغية */
+        .canceled-card {
+            position: relative;
+            border-right: 5px solid #da3633 !important;
+            opacity: 0.5;
+            background: #1c1314 !important;
+        }
+        .canceled-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: #da3633;
+            color: #fff;
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-weight: 900;
+            font-size: 1.1rem;
+        }
+
+        /* تنسيق حاوية وزرار الامتحان الجديد */
+        .exam-portal-section {
+            width: 100%;
+            padding: 50px 20px;
+            text-align: center;
+            background: #111827;
+            border-top: 3px dashed #fbbf24;
+            border-radius: 20px;
+            margin-top: 60px;
+        }
+        .go-to-exam-btn {
+            display: inline-block;
+            padding: 18px 45px;
+            background: transparent;
+            color: #fbbf24;
+            font-size: 1.6rem;
+            font-weight: 900;
+            text-decoration: none;
+            border: 3px solid #fbbf24;
+            border-radius: 50px;
+            position: relative;
+            transition: 0.4s ease-in-out;
+            overflow: hidden;
+            z-index: 1;
+        }
+        .go-to-exam-btn:hover {
+            color: #000;
+            box-shadow: 0 0 25px #fbbf24, 0 0 50px #fbbf24;
+            transform: scale(1.05);
+        }
+        .go-to-exam-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: #fbbf24;
+            transition: 0.4s;
+            z-index: -1;
+        }
+        .go-to-exam-btn:hover::before {
+            left: 0;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>ملخص منهج اللغة العربية</h1>
+        <p>الشهادة الإعدادية - الفصل الدراسي الثاني</p>
+    </header>
+
+    <div class="nav-pills">
+        <div class="pill" onclick="window.scrollTo(0, document.getElementById('reading').offsetTop)">📖 القراءة</div>
+        <div class="pill" onclick="window.scrollTo(0, document.getElementById('texts').offsetTop)">✍️ النصوص</div>
+        <div class="pill" onclick="window.scrollTo(0, document.getElementById('story').offsetTop)">⚔️ القصة</div>
+    </div>
+
+    <h2 class="section-title" id="reading">أولاً: دروس القراءة</h2>
+    
+    <div class="lesson-card">
+        <h3>1. الحياة دقائق وثوانٍ</h3>
+        <div class="summary-box">
+            <ul>
+                <li>عمر الإنسان يقاس بما يقدمه من خير وعلم ينفع البشرية.</li>
+                <li>إسحاق نيوتن استغل وقت فراغه في "التأمل" فوصل لنظرية الجاذبية الأرضية.</li>
+                <li>قليل من الزمن يُخصص كل يوم لشيء معين قد يغير مجرى الحياة.</li>
+            </ul>
+            <div class="q-box">س: كيف يقاس عمر الإنسان؟ ج: بما يقدمه من نفع للبشرية.</div>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <h3>2. فالق الحب والنوى</h3>
+        <div class="summary-box">
+            <ul>
+                <li>حبة القمح ونواة التمر ليستا جماداً أصم، بل هما خزانتان لطاقة حيوية جبارة.</li>
+                <li>تتحول الحبة إلى سنابل والنواة إلى نخلة سامقة بفضل مشيئة الله وعناصر الطبيعة.</li>
+                <li>الهدف من الدرس: التأمل في قدرة الله ليزداد إيماننا.</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <h3>3. الحمامة المطوقة</h3>
+        <div class="summary-box">
+            <li>قصة من "كليلة ودمنة" تحث على التعاون والإيثار.</li>
+            <li>المطوقة أنقذت سربها بالتعاون والطيران كطائر واحد.</li>
+            <li>الصديق وقت الضيق (دور الجرذ في قرض الشبكة).</li>
+        </div>
+    </div>
+
+    <h2 class="section-title" id="texts">ثانياً: النصوص (نثر وشعر)</h2>
+
+    <div class="lesson-card">
+        <h3>1. سفينة نوح (قرآن كريم) - حفظ</h3>
+        <div class="summary-box">
+            <li>دعوة نوح لقومه، وسخريتهم منه وهو يصنع السفينة.</li>
+            <li>أمر الله لنوح بحمل من كل زوجين اثنين ومن آمن معه.</li>
+            <li>نهاية الكافرين (الغرق) ونجاة المؤمنين.</li>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <h3>2. خلال كريمة (شعر - حافظ إبراهيم)</h3>
+        <div class="summary-box">
+            <li>إعجاب الشاعر بالأخلاق الكريمة (المروءة والندى).</li>
+            <li>الرزق أنواع: مال، علم، أو أخلاق (وهي أفضلهم).</li>
+            <li>العلم بلا أخلاق يؤدي إلى الفشل والهلاك.</li>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <h3>3. رسالة إلى ابني (نثر - د. فاخر عاقل)</h3>
+        <div class="summary-box">
+            <li>نصيحة الأب لابنه باستخدام العقل والحرية في اختيار طريقه.</li>
+            <li>السعادة تكمن في القيام بالعمل الذي تحب على الوجه الأكمل.</li>
+            <li>الأخلاق ليست مجرد شعارات بل هي "سلوك وعمل".</li>
+        </div>
+    </div>
+
+    <div class="lesson-card">
+        <h3>4. وادي الكنانة (شعر - الهراوي)</h3>
+        <div class="summary-box">
+            <li>الدعوة للعمل من أجل مجد مصر وبناء مستقبلها.</li>
+            <li>النيل هو سر خلود مصر وعطائها المستمر.</li>
+        </div>
+    </div>
+
+    <h2 class="section-title" id="story">ثالثاً: طموح جارية (شجرة الدر)</h2>
+
+    <div class="lesson-card canceled-card">
+        <div class="canceled-badge">❌ ملغية</div>
+        <h3 style="color: #da3633;">ملخص الأحداث الرئيسية</h3>
+        <div class="summary-box">
+            <ul>
+                <li>تكوين جمعيتين سريتين (القاهرة ودمشق) لتوحيد الصفوف ضد الفرنج.</li>
+                <li>موت السلطان نجم الدين في وقت حرج أثناء معركة المنصورة.</li>
+                <li>ذكاء شجرة الدر في إخفاء خبر موت السلطان حتى لا تضعف عزيمة الجيش.</li>
+                <li>الانتصار الكبير في المنصورة وأسر لويس التاسع في دار ابن لقمان.</li>
+            </ul>
+        </div>
+    </div>
+
+    <footer>
+        <p>تم إعداد هذا الملخص بواسطة EYAD</p>
+    </footer>
+</div>
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الصقر في اللغة العربية | المشتقات</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        :root { --bg: #0f172a; --card: #1e293b; --gold: #fbbf24; --blue: #38bdf8; --green: #4ade80; --red: #f87171; --text: #f1f5f9; }
+        body { background-color: var(--bg); color: var(--text); font-family: 'Cairo', sans-serif; margin: 0; padding: 20px; line-height: 1.6; }
+        .container { max-width: 1000px; margin: auto; }
+        
+        header { text-align: center; margin-bottom: 40px; border: 2px double var(--gold); padding: 20px; border-radius: 15px; background: rgba(251, 191, 36, 0.05); }
+        h1 { color: var(--gold); font-size: 2.5rem; margin: 0; }
+        .sub-header { color: var(--blue); font-size: 1.2rem; font-weight: bold; }
+
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        
+        .card { background: var(--card); border-radius: 15px; padding: 20px; border: 1px solid #334155; transition: 0.3s; position: relative; overflow: hidden; }
+        .card:hover { transform: translateY(-5px); border-color: var(--gold); }
+        .card h2 { color: var(--blue); border-bottom: 1px solid #334155; padding-bottom: 10px; margin-top: 0; display: flex; align-items: center; gap: 10px; }
+        
+        .badge { background: var(--gold); color: #000; padding: 2px 10px; border-radius: 5px; font-size: 0.8rem; font-weight: bold; }
+        .example { background: rgba(56, 189, 248, 0.1); padding: 10px; border-radius: 8px; margin-top: 10px; font-size: 0.95rem; }
+        .note { color: var(--red); font-size: 0.9rem; font-weight: bold; margin-top: 10px; display: block; }
+
+        .rules-list { list-style: none; padding: 0; }
+        .rules-list li { margin-bottom: 8px; position: relative; padding-right: 20px; }
+        .rules-list li::before { content: "←"; position: absolute; right: 0; color: var(--gold); }
+
+        footer { text-align: center; margin-top: 50px; padding: 30px; border-top: 1px solid #334155; }
+        .thanks-msg { font-size: 1.8rem; color: var(--gold); font-weight: 900; animation: glow 2s infinite; }
+        @keyframes glow { 0%, 100% { opacity: 1; } 50% { opacity: 0.6; } }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <header>
+        <h1>🦅 الصقر في اللغة العربية</h1>
+        <div class="sub-header">ملخص المشتقات - الصف الثالث الإعدادي</div>
+        <p>كل المشتقات قد تأتي: (مفرد - مثنى - جمع / مذكر - مؤنث)</p>
+    </header>
+
+    <div class="grid">
+        <div class="card">
+            <h2><span>1</span> اسم الفاعل <span class="badge">فاعل / مُـ+ـِ</span></h2>
+            <ul class="rules-list">
+                <li><b>من الثلاثي:</b> على وزن (فـاعـل) ← نجح : ناجح</li>
+                <li><b>المعتل الآخر:</b> فاعٍ (في الرفع والجر) ← قاضٍ، داعٍ</li>
+                <li><b>من غير الثلاثي:</b> ميم مضمومة وكسر ما قبل الآخر ← مُخلِص</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2><span>2</span> اسم المفعول <span class="badge">مفعول / مُـ+ـَ</span></h2>
+            <ul class="rules-list">
+                <li><b>من الثلاثي:</b> على وزن (مفعول) ← كُتب : مكتوب</li>
+                <li><b>من الأجوف:</b> قال : مَقُول | بـاع : مَبِيع</li>
+                <li><b>من غير الثلاثي:</b> ميم مضمومة وفتح ما قبل الآخر ← مُشترَك</li>
+            </ul>
+            <span class="note">⚠️ يصاغ من الفعل المبني للمجهول</span>
+        </div>
+
+        <div class="card">
+            <h2><span>3</span> صيغ المبالغة <span class="badge">5 أوزان</span></h2>
+            <div class="example">
+                <b>الأوزان:</b> [ فَعول - فَعيل - مِفْعال - فَعّال - فَعِل ]
+            </div>
+            <ul class="rules-list">
+                <li><b>أمثلة فَعِل:</b> فطن، يقظ، ثمل، حذر، لبق، قلق</li>
+                <li><b>من الرباعي (نادر):</b> نذير (أنذر)، مقدام (أقدم)</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2><span>4</span> اسم الزمان والمكان</h2>
+            <ul class="rules-list">
+                <li><b>من الثلاثي:</b> مَفْعَل أو مَفْعِل ← مأوى، مجرى</li>
+                <li><b>من غير الثلاثي:</b> مثل اسم المفعول (مُـ+ـَ) ← ملتقى</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2><span>5</span> اسم الآلة <span class="badge">قياسي / جامد</span></h2>
+            <ul class="rules-list">
+                <li><b>مشتق (قياسي):</b> منشار, مبرد، غسالة، مِعْول</li>
+                <li><b>جامد (سماعي):</b> شاكوش، قلم، سيف، سكين</li>
+            </ul>
+        </div>
+
+        <div class="card">
+            <h2><span>6</span> اسم التفضيل <span class="badge">أفعل / فعلى</span></h2>
+            <ul class="rules-list">
+                <li><b>الوزن:</b> أفعل (مذكر) | فعلى (مؤنث) ← أكبر/كبرى</li>
+                <li><b>سماعي:</b> خـيـر - شـر - حـبّ</li>
+            </ul>
+            <span class="note">🚫 لا يصاغ من: (مات، فني) أو (ليس، بئس)</span>
+        </div>
+    </div>
+
+    <footer>
+        <div class="thanks-msg">⬇️</div>
+        <div class="thanks-msg">شكراً لمستر طه رمضان</div>
+        <p>مدرس اللغة العربية | 01005897375</p>
+    </footer>
+
+    <div class="exam-portal-section">
+        <h2 style="color: #fbbf24; font-size: 2rem; margin-bottom: 10px;">جاهز للتحدي النهائي؟ 🦅</h2>
+        <p style="color: #94a3b8; margin-bottom: 25px; font-size: 1.1rem;">بعد ما راجعت منهجك وظبطت المشتقات، ادخل على الامتحان فوراً.</p>
+        <a href="arabic_exam.html" class="go-to-exam-btn">
+            ⬅️ دخول لجنة امتحان النحو
+        </a>
+    </div>
+</div>
+
+</body>
+</html>

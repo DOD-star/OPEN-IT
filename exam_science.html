@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Official Science Exam - 30 Marks</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Inter:wght@400;700&family=Permanent+Marker&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4f46e5;
+            --desk: #0f172a;
+            --paper: #ffffff;
+            --wrong-red: #d32f2f;
+            --right-green: #2e7d32;
+        }
+
+        body {
+            background: var(--desk);
+            font-family: 'Inter', sans-serif;
+            padding: 40px 20px;
+            margin: 0;
+        }
+
+        .exam-sheet {
+            background: var(--paper);
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px;
+            border-radius: 4px;
+            position: relative;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.5);
+        }
+
+        /* الدرجة بخط الإيد (تتغير ألوانها بالجافا سكريبت) */
+        #handwritten-score {
+            position: absolute;
+            top: 50px;
+            right: 60px;
+            font-family: 'Permanent Marker', cursive;
+            font-size: 4rem;
+            transform: rotate(8deg);
+            display: none;
+            border: 4px solid;
+            padding: 10px 20px;
+            border-radius: 15px;
+            line-height: 1;
+        }
+
+        header { border-bottom: 2px solid #e2e8f0; margin-bottom: 40px; padding-bottom: 20px; }
+        h1 { margin: 0; font-size: 2rem; color: #1e293b; }
+        
+        .student-info { margin-bottom: 30px; }
+        .student-info input {
+            border: none; border-bottom: 2px solid #cbd5e1;
+            padding: 10px; width: 300px; outline: none; font-family: 'Cairo'; font-size: 1.1rem;
+        }
+
+        .section-title {
+            background: #f8fafc; padding: 12px;
+            border-left: 6px solid var(--primary);
+            font-weight: 800; margin: 40px 0 20px;
+            color: var(--primary); font-size: 1.1rem;
+        }
+
+        .q-box { margin-bottom: 30px; border-bottom: 1px solid #f1f5f9; padding-bottom: 20px; }
+        .q-text { font-weight: 600; margin-bottom: 15px; display: block; color: #334155; }
+        
+        .options label { 
+            display: block; padding: 10px 15px; margin: 8px 0; 
+            background: #f8fafc; border-radius: 8px; cursor: pointer; transition: 0.2s;
+        }
+        .options label:hover { background: #eff6ff; }
+        
+        .text-input { 
+            width: 100%; padding: 12px; border: 1px solid #e2e8f0; 
+            border-radius: 8px; font-family: 'Inter'; font-size: 1rem;
+        }
+
+        .hand-btn {
+            background: var(--primary); color: white; border: none;
+            padding: 20px; width: 100%; border-radius: 12px;
+            font-size: 1.4rem; font-weight: bold; cursor: pointer;
+            transition: 0.4s ease; margin-top: 30px;
+        }
+        .hand-btn:hover { background: #3730a3; transform: translateY(-3px); box-shadow: 0 10px 20px rgba(79, 70, 229, 0.3); }
+
+        #motivational-msg {
+            text-align: center; font-size: 2.2rem; font-weight: bold;
+            margin: 25px 0; font-family: 'Cairo'; display: none;
+        }
+
+        .history-section {
+            max-width: 800px; margin: 50px auto;
+            color: #94a3b8; border-top: 1px solid #334155; padding-top: 25px;
+            text-align: center; font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+
+<div class="exam-sheet">
+    <div id="handwritten-score">0/30</div>
+
+    <header>
+        <h1>Science Prep 3 - Final Exam</h1>
+        <p style="color: #64748b;">Second Term | Full Curriculum Practice</p>
+        <div class="student-info">
+            <input type="text" id="studentName" placeholder="Enter your name / اكتب اسمك">
+        </div>
+    </header>
+
+    <div id="motivational-msg"></div>
+
+    <form id="scienceForm">
+        <div class="section-title">Section I: Choose the Correct Answer (10 Marks)</div>
+        <div id="mcq-container">
+            </div>
+
+        <div class="section-title">Section II: Scientific Concepts (10 Marks)</div>
+        <div id="text-container-1">
+            </div>
+
+        <div class="section-title">Section III: Give Reason For (10 Marks)</div>
+        <div id="text-container-2">
+            </div>
+
+        <button type="button" class="hand-btn" onclick="submitExam()">Hand in Paper</button>
+    </form>
+</div>
+
+<div class="history-section">
+    <p id="history-text">Welcome! Good luck with your first attempt.</p>
+</div>
+
+<script>
+// أسئلة حقيقية 100% من منهج تالتة إعدادي
+const mcqData = [
+    {q: "The electric current produced from a Dynamo is ____.", o: ["Direct", "Alternating", "Constant"], a: 1},
+    {q: "The unit of electric charge is ____.", o: ["Volt", "Ampere", "Coulomb"], a: 2},
+    {q: "Adding Magnesium to Copper Sulfate solution forms a ____ precipitate.", o: ["Blue", "Red", "White"], a: 1},
+    {q: "The hormone that regulates glucose level in blood is ____.", o: ["Thyroxine", "Insulin", "Adrenaline"], a: 1},
+    {q: "Who is the founder of Genetics?", o: ["Ohm", "Mendel", "Becquerel"], a: 1},
+    {q: "Resistance is measured by a device called ____.", o: ["Ammeter", "Voltmeter", "Ohmeter"], a: 2},
+    {q: "Thermal decomposition of Copper Carbonate gives ____ gas.", o: ["Oxygen", "Hydrogen", "CO2"], a: 2},
+    {q: "An atom that lost one or more electrons during reaction is ____.", o: ["Reduced", "Oxidized", "Neutral"], a: 1},
+    {q: "Connection of cells in series gives EMF equal to ____.", o: ["n x E1", "E1", "E1 / n"], a: 0},
+    {q: "Lack of Thyroxine causes a disease called ____.", o: ["Diabetes", "Simple Goiter", "Dwarfism"], a: 1}
+];
+
+const conceptsData = [
+    "Thermal Decomposition", "Ohm's Law", "The Gene", "Catalyst", "Radioactivity", 
+    "Potential Difference", "Hormones", "Neutralization Reaction", "The Pituitary Gland", "Electric Power"
+];
+
+const reasonData = [
+    "The pituitary gland is called the Master Gland.",
+    "Connecting electric cells in parallel in a circuit.",
+    "Aluminium reacts slower than Zinc with HCl although it's more active.",
+    "The use of Slide Rheostat in some electric circuits.",
+    "Pancreas is a double-function gland.",
+    "Friedel-Crafts reaction speed (surface area).",
+    "Mendel chose Pea plants for his experiments.",
+    "Wood shavings burn faster than a piece of wood of the same mass.",
+    "Adding Manganese dioxide during decomposition of H2O2.",
+    "Appearance of dominant trait in F1 according to Mendel."
+];
+
+function load() {
+    const mcqCont = document.getElementById('mcq-container');
+    mcqData.forEach((d, i) => {
+        mcqCont.innerHTML += `
+            <div class="q-box">
+                <span class="q-text">${i+1}. ${d.q}</span>
+                <div class="options">
+                    ${d.o.map((opt, idx) => `<label><input type="radio" name="m${i}" value="${idx}"> ${opt}</label>`).join('')}
+                </div>
+            </div>`;
+    });
+
+    const t1 = document.getElementById('text-container-1');
+    conceptsData.forEach((q, i) => {
+        t1.innerHTML += `
+            <div class="q-box">
+                <span class="q-text">${i+11}. What is meant by: ${q}?</span>
+                <input type="text" class="text-input" id="ti${i}" placeholder="Write the definition...">
+            </div>`;
+    });
+
+    const t2 = document.getElementById('text-container-2');
+    reasonData.forEach((q, i) => {
+        t2.innerHTML += `
+            <div class="q-box">
+                <span class="q-text">${i+21}. Give Reason: ${q}</span>
+                <input type="text" class="text-input" id="ri${i}" placeholder="Because...">
+            </div>`;
+    });
+}
+
+function submitExam() {
+    const name = document.getElementById('studentName').value;
+    if(!name) return alert("Write your name first!");
+
+    let score = 0;
+    // حساب MCQ
+    mcqData.forEach((d, i) => {
+        const sel = document.querySelector(`input[name="m${i}"]:checked`);
+        if(sel && parseInt(sel.value) === d.a) score++;
+    });
+    
+    // حساب المقالي (تقديري بناءً على الكتابة)
+    for(let i=0; i<10; i++) if(document.getElementById(`ti${i}`).value.trim().length > 5) score++;
+    for(let i=0; i<10; i++) if(document.getElementById(`ri${i}`).value.trim().length > 8) score++;
+
+    // إظهار الدرجة وتغيير اللون
+    const scoreDiv = document.getElementById('handwritten-score');
+    scoreDiv.innerText = `${score}/30`;
+    scoreDiv.style.display = "block";
+
+    if(score >= 19) {
+        scoreDiv.style.color = "#2e7d32"; // أخضر
+        scoreDiv.style.borderColor = "#2e7d32";
+    } else {
+        scoreDiv.style.color = "#d32f2f"; // أحمر
+        scoreDiv.style.borderColor = "#d32f2f";
+    }
+
+    // رسائل التشجيع
+    const msg = document.getElementById('motivational-msg');
+    msg.style.display = "block";
+    if(score >= 25) { msg.innerText = `عاش يا ${name}! تقفيل يا بطل 🚀`; msg.style.color = "green"; }
+    else if(score >= 19) { msg.innerText = `وحش يا ${name}! نتيجة ممتازة ⚡`; msg.style.color = "#2e7d32"; }
+    else if(score >= 15) { msg.innerText = `اصبر يا ${name}.. محتاج تذاكر أكتر 🔥`; msg.style.color = "orange"; }
+    else { msg.innerText = `محتاج تطور نفسك جداً يا ${name} 📚`; msg.style.color = "red"; }
+
+    document.getElementById('history-text').innerText = `Full History: Dear ${name}, your latest score is ${score} out of 30.`;
+    window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+load();
+</script>
+</body>
+</html>
