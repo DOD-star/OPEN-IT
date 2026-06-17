@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>العد التنازلي لجودي ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            background: linear-gradient(rgba(110, 68, 41, 0.3), rgba(110, 68, 41, 0.3)), 
+                        url('https://images.unsplash.com/photo-1541123437800-1bb1317badc2?q=80&w=1470&auto=format&fit=cover');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .counter-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px 30px;
+            border-radius: 15px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.4);
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            transform: rotate(-1deg);
+        }
+
+        .big-pin {
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 24px;
+            height: 24px;
+            background-color: #e74c3c;
+            border-radius: 50%;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.3);
+            z-index: 10;
+        }
+
+        .big-pin::after {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: 7px;
+            width: 7px;
+            height: 7px;
+            background: rgba(255,255,255,0.6);
+            border-radius: 50%;
+        }
+
+        .counter-card h1 {
+            color: #bd4b5a;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .counter-card p {
+            color: #666;
+            font-size: 1.1rem;
+            margin-bottom: 30px;
+        }
+
+        .countdown-container {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .time-box {
+            background: linear-gradient(135deg, #bd4b5a, #8e44ad);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            min-width: 90px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+        }
+
+        .time-box .number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            display: block;
+            line-height: 1.2;
+        }
+
+        .time-box .label {
+            font-size: 0.85rem;
+            color: #f0e6ff;
+            margin-top: 5px;
+            display: block;
+        }
+
+        .skip-btn {
+            display: inline-block;
+            margin-top: 35px;
+            background: transparent;
+            color: #8e44ad;
+            border: 2px dashed #8e44ad;
+            padding: 10px 25px;
+            font-size: 0.95rem;
+            font-weight: bold;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+        }
+
+        .skip-btn:hover {
+            background: #8e44ad;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="counter-card">
+        <div class="big-pin"></div>
+        <h1>الرحلة مستمرة... ⏳</h1>
+        <p>فاضل قد إيه على يوم ميلاد جودي المميز؟ 🎂</p>
+
+        <div class="countdown-container">
+            <div class="time-box">
+                <span class="number" id="days">00</span>
+                <span class="label">يوم</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="hours">00</span>
+                <span class="label">ساعة</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="minutes">00</span>
+                <span class="label">دقيقة</span>
+            </div>
+            <div class="time-box">
+                <span class="number" id="seconds">00</span>
+                <span class="label">ثانية</span>
+            </div>
+        </div>
+
+        <a href="message.html" class="skip-btn">مش قادرة أستنى؟ إدخلي للرسايل فوراً 💌</a>
+    </div>
+
+    <script>
+        // تحديد تاريخ الهدف 3 أكتوبر 2026
+        const targetDate = new Date("October 3, 2026 00:00:00").getTime();
+
+        const countdownFunction = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = targetDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+            document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+            document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+            document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                window.location.href = "message.html";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

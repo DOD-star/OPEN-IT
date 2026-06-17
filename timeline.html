@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ذكريات جودي عماد ✨</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Cairo', 'Tajawal', sans-serif;
+            /* خلفية بتأثير حائط خشبي دافئ وناعم */
+            background: linear-gradient(rgba(110, 68, 41, 0.2), rgba(110, 68, 41, 0.2)), 
+                        url('https://images.unsplash.com/photo-1541123437800-1bb1317badc2?q=80&w=1470&auto=format&fit=cover');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            padding: 30px 20px;
+            overflow-x: hidden;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            z-index: 10;
+            background: rgba(255, 255, 255, 0.85);
+            padding: 15px 40px;
+            border-radius: 50px;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+
+        header h1 {
+            color: #bd4b5a;
+            font-size: 2.2rem;
+            margin-bottom: 5px;
+        }
+
+        header p {
+            color: #555;
+            font-size: 1rem;
+        }
+
+        /* لوحة الحائط */
+        .board-container {
+            position: relative;
+            width: 100%;
+            max-width: 1100px;
+            height: 600px;
+            margin-bottom: 40px;
+        }
+
+        /* ستايل كارت الصورة الفوتوغرافية المتثبتة */
+        .photo-card {
+            position: absolute;
+            background: #fafafa;
+            padding: 12px 12px 30px 12px;
+            border-radius: 2px;
+            box-shadow: 3px 12px 25px rgba(0,0,0,0.3);
+            width: 190px;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            z-index: 2;
+        }
+
+        .photo-card img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border: 1px solid #ddd;
+        }
+
+        .photo-card .card-caption {
+            text-align: center;
+            font-size: 0.9rem;
+            color: #444;
+            margin-top: 12px;
+            font-weight: bold;
+        }
+
+        /* الدبوس (Push Pin) المتثبت فوق الصورة */
+        .pin {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 20px;
+            background-color: #ff3838; /* دبوس أحمر */
+            border-radius: 50%;
+            box-shadow: 0 4px 5px rgba(0,0,0,0.4);
+            z-index: 10;
+        }
+
+        .pin::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 6px;
+            width: 7px;
+            height: 7px;
+            background-color: rgba(255,255,255,0.6);
+            border-radius: 50%;
+        }
+
+        /* تغيير ألوان الدبابيس بشكل عشوائي للروقان */
+        .card-2 .pin { background-color: #2ecc71; } /* أخضر */
+        .card-4 .pin { background-color: #3498db; } /* أزرق */
+        .card-5 .pin { background-color: #f1c40f; } /* أصفر */
+        .card-7 .pin { background-color: #9b59b6; } /* بنفسجي */
+
+        /* تأثير الحركة عند تمرير الماوس */
+        .photo-card:hover {
+            transform: scale(1.1) rotate(0deg) !important;
+            box-shadow: 5px 18px 35px rgba(0,0,0,0.4);
+            z-index: 20;
+        }
+
+        /* توزيع مائل وعشوائي للصور على الحيطة الخشب */
+        .card-1 { top: 8%; right: 4%; transform: rotate(-6deg); }
+        .card-2 { top: 12%; right: 29%; transform: rotate(5deg); }
+        .card-3 { top: 5%; right: 54%; transform: rotate(-4deg); }
+        .card-4 { top: 10%; right: 78%; transform: rotate(7deg); }
+        .card-5 { top: 52%; right: 12%; transform: rotate(4deg); }
+        .card-6 { top: 48%; right: 42%; transform: rotate(-7deg); }
+        .card-7 { top: 50%; right: 70%; transform: rotate(3deg); }
+
+        /* نافذة العرض الكبيرة (Lightbox) */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .lightbox-content {
+            background: #fff;
+            padding: 20px;
+            border-radius: 12px;
+            max-width: 480px;
+            width: 90%;
+            text-align: center;
+            position: relative;
+            transform: scale(0.85);
+            transition: transform 0.4s ease;
+            box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+        }
+
+        .lightbox.active .lightbox-content {
+            transform: scale(1);
+        }
+
+        .lightbox-img {
+            width: 100%;
+            max-height: 380px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 15px;
+        }
+
+        .lightbox-title {
+            font-size: 1.4rem;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+
+        .lightbox-desc {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .close-btn {
+            position: absolute;
+            top: -12px;
+            left: -12px;
+            background: #ff3838;
+            color: white;
+            border: none;
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            line-height: 35px;
+        }
+
+        /* زر السفر السفلي */
+        .footer-container {
+            text-align: center;
+            margin-top: 15px;
+            z-index: 10;
+        }
+
+        .travel-btn {
+            display: inline-block;
+            background: linear-gradient(45deg, #bd4b5a, #8e44ad);
+            color: white;
+            padding: 14px 50px;
+            font-size: 1.25rem;
+            font-weight: 700;
+            text-decoration: none;
+            border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            transition: all 0.3s ease;
+        }
+
+        .travel-btn:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+        }
+
+        /* للموبايل عشان الصور تترص تحت بعضها بشكل شيك */
+        @media (max-width: 768px) {
+            .board-container {
+                height: auto;
+                display: flex;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 30px 20px;
+                padding: 20px 10px;
+            }
+            .photo-card {
+                position: relative;
+                top: auto !important;
+                right: auto !important;
+                transform: rotate(0deg) !important;
+                width: 45%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>حكاية جودي عماد 💕</h1>
+        <p>اضغطي على أي صورة عشان تشوفيها بوضوح</p>
+    </header>
+
+    <div class="board-container">
+        
+        <div class="photo-card card-1" onclick="openMe(this)" data-title="أجمل بداية 🎂" data-desc="اليوم السعيد اللي نورتي فيه الدنيا وبدأت حكايتك الجميلة وسط كل اللي بيحبوكي.">
+            <div class="pin"></div>
+            <img src="IMG-20260616-WA0020.jpg" alt="جودي">
+            <div class="card-caption">من صغرك هاديه</div>
+        </div>
+
+        <div class="photo-card card-2" onclick="openMe(this)" data-title="الضحكة الصافية 🥰" data-desc="ضحكتك اللي دايماً بتنور المكان وبتملى القلوب فرحة وطاقة إيجابية.">
+            <div class="pin"></div>
+            <img src="IMG-20260616-WA0023.jpg" alt="جودي">
+            <div class="card-caption"> بتبصيلي كده ليه</div>
+        </div>
+
+        <div class="photo-card card-3" onclick="openMe(this)" data-title="الجمال والرقة كلها 🌸" data-desc="تفاصيل البراءة والجمال اللي بتكبر معاكي وتخليكي مميزة دايماً في عيوننا.">
+            <div class="pin"></div>
+            <img src="IMG-20260616-WA0036.jpg" alt="جودي">
+            <div class="card-caption"> bad jody</div>
+        </div>
+
+        <div class="photo-card card-4" onclick="openMe(this)" data-title="تكبر الحكاية ✨" data-desc="كل خطوة وكل مرحلة بتعدي بتسيب وراها ذكريات من دهب وصور محفورة في القلب.">
+            <div class="pin"></div>
+            <img src="Screenshot_20260617_081953.jpg" alt="جودي">
+            <div class="card-caption"> im just jody</div>
+        </div>
+
+        <div class="photo-card card-5" onclick="openMe(this)" data-title="الطلة الملكية 👑" data-desc="حضور مميز دايماً واختلاف يخلي كل صورة تطلع بأجمل وأرقى شكل ممكن.">
+            <div class="pin"></div>
+            <img src="Screenshot_20260617_082021.jpg" alt="جودي">
+            <div class="card-caption">كنتي بتنضفي الرصيف تقريبا</div>
+        </div>
+
+        <div class="photo-card card-6" onclick="openMe(this)" data-title="فرحة وخطوات ثابتة 🎉" data-desc="الرحلة مليانة مواقف سعيدة وتفاصيل مبهجة، ولسه الجاي في حياتك أجمل بكتير.">
+            <div class="pin"></div>
+            <img src="Screenshot_20260617_082047.jpg" alt="جودي">
+            <div class="card-caption">كيوت هنا</div>
+        </div>
+
+        <div class="photo-card card-7" onclick="openMe(this)" data-title="المستقبل المستنيكي 💫" data-desc="وصلنا لهنا.. بس دي مش النهاية، دي مجرد محطة لحاجات تانية أجمل بكتير مستنياكي في الطريق!">
+            <div class="pin"></div>
+            <img src="Screenshot_20260617_082159.jpg" alt="جودي">
+            <div class="card-caption">كنتي متغفله تقريبا</div>
+        </div>
+
+    </div>
+
+    <div class="footer-container">
+        <a href="message.html" class="travel-btn">السفر للي بعده؟ 🚀</a>
+    </div>
+
+    <div class="lightbox" id="myLightbox" onclick="closeMe()">
+        <div class="lightbox-content" onclick="event.stopPropagation()">
+            <button class="close-btn" onclick="closeMe()">×</button>
+            <img src="" id="popImg" class="lightbox-img">
+            <h2 id="popTitle" class="lightbox-title"></h2>
+            <p id="popDesc" class="lightbox-desc"></p>
+        </div>
+    </div>
+
+    <script>
+        const lightbox = document.getElementById('myLightbox');
+        const popImg = document.getElementById('popImg');
+        const popTitle = document.getElementById('popTitle');
+        const popDesc = document.getElementById('popDesc');
+
+        function openMe(card) {
+            const imgSrc = card.querySelector('img').src;
+            const title = card.getAttribute('data-title');
+            const desc = card.getAttribute('data-desc');
+
+            popImg.src = imgSrc;
+            popTitle.innerText = title;
+            popDesc.innerText = desc;
+
+            lightbox.classList.add('active');
+        }
+
+        function closeMe() {
+            lightbox.classList.remove('active');
+        }
+    </script>
+</body>
+</html>
